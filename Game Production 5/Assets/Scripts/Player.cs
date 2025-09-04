@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     Rigidbody rb;
 
     float Collectable_remaining = 2;
+    float move_speed = 500;
 
     bool move_door = false;
     bool is_grounded = true;
@@ -22,19 +23,19 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.W))
         {
-            rb.AddForce(Vector3.forward * Time.deltaTime * 1000);
+            rb.AddForce(rb.transform.forward * Time.deltaTime * move_speed);
         }
         if (Input.GetKey(KeyCode.A))
         {
-            rb.AddForce(Vector3.left * Time.deltaTime * 1000);
+            rb.AddForce(-rb.transform.right * Time.deltaTime * move_speed);
         }
         if (Input.GetKey(KeyCode.S))
         {
-            rb.AddForce(Vector3.back * Time.deltaTime * 1000);
+            rb.AddForce(-rb.transform.forward * Time.deltaTime * move_speed);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            rb.AddForce(Vector3.right * Time.deltaTime * 1000);
+            rb.AddForce(rb.transform.right * Time.deltaTime * move_speed);
         }
         if (Input.GetKeyDown(KeyCode.Space) && is_grounded == true)
         {
@@ -42,9 +43,9 @@ public class Player : MonoBehaviour
             is_grounded = false;
         }
         
-        if(move_door)
+        if (move_door)
         {
-            Door.transform.position += Vector3.up * Time.deltaTime;
+            Door.transform.position += Vector3.up * Time.deltaTime * 2;
             if (Door.transform.position.y >= 5)
             {
                 Door.gameObject.SetActive(false);
