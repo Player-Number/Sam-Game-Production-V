@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
         if (move_door)
         {
             Door.transform.position += Vector3.up * Time.deltaTime * 2;
-            if (Door.transform.position.y >= 5)
+            if (Door.transform.position.y >= 6.5f)
             {
                 Door.gameObject.SetActive(false);
             }
