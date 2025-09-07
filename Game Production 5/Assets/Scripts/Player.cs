@@ -4,12 +4,14 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] TMP_Text Collectable_Text;
+    [SerializeField] TMP_Text Timer_Text;
     public GameObject Door;
 
     Rigidbody rb;
 
     public float Collectable_remaining = 2;
     float move_speed = 500;
+    float Timer = 0;
 
     bool move_door = false;
     bool is_grounded = true;
@@ -86,6 +88,9 @@ public class Player : MonoBehaviour
                 //Door.gameObject.SetActive(false);
             }
         }
+
+        Timer += Time.deltaTime;
+        Timer_Text.text = Timer.ToString("F2");
     }
 
     private void OnTriggerEnter(Collider other)
@@ -93,7 +98,7 @@ public class Player : MonoBehaviour
         if (other.gameObject.tag == "Collectable")
         {
             Collectable_remaining -= 1;
-            Collectable_Text.text = "Collectable remaining: " + (Collectable_remaining);
+            Collectable_Text.text = "Collectable Remaining: " + (Collectable_remaining);
             other.gameObject.SetActive(false);
             if (Collectable_remaining <= 0)
             {
@@ -103,7 +108,7 @@ public class Player : MonoBehaviour
         else if (other.gameObject.tag == "New_Room")
         {
             //Collectable_remaining = 4;
-            Collectable_Text.text = "Collectable remaining: " + (Collectable_remaining);
+            Collectable_Text.text = "Collectable Remaining: " + (Collectable_remaining);
             other.gameObject.SetActive(false);
             move_door = false;
         }
