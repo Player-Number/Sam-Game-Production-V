@@ -4,15 +4,15 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] TMP_Text Collectable_Text;
-    [SerializeField] GameObject Door;
+    public GameObject Door;
 
     Rigidbody rb;
 
-    float Collectable_remaining = 2;
+    public float Collectable_remaining = 2;
     float move_speed = 500;
 
     bool move_door = false;
-    public bool is_grounded = true;
+    bool is_grounded = true;
 
     float horizontal_move_cap = 3;
     float vertical_move_cap = 5;
@@ -69,7 +69,8 @@ public class Player : MonoBehaviour
             Door.transform.position += Vector3.up * Time.deltaTime * 2;
             if (Door.transform.position.y >= 6.5f)
             {
-                Door.gameObject.SetActive(false);
+                move_door = false;
+                //Door.gameObject.SetActive(false);
             }
         }
     }
@@ -88,9 +89,10 @@ public class Player : MonoBehaviour
         }
         else if (other.gameObject.tag == "New_Room")
         {
-            Collectable_remaining = 4;
+            //Collectable_remaining = 4;
             Collectable_Text.text = "Collectable remaining: " + (Collectable_remaining);
             other.gameObject.SetActive(false);
+            move_door = false;
         }
     }
 
