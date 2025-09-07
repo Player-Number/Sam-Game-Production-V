@@ -12,7 +12,10 @@ public class Player : MonoBehaviour
     float move_speed = 500;
 
     bool move_door = false;
-    bool is_grounded = true;
+    public bool is_grounded = true;
+
+    float horizontal_move_cap = 3;
+    float vertical_move_cap = 5;
 
     void Start()
     {
@@ -39,10 +42,28 @@ public class Player : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space) && is_grounded == true)
         {
-            rb.AddForce(Vector3.up * Time.deltaTime * 20000);
-            is_grounded = false;
+            rb.AddForce(Vector3.up * Time.deltaTime * 25000);
+            //is_grounded = false;
         }
-        
+        if (rb.linearVelocity.y >= vertical_move_cap)
+        {
+            rb.linearVelocity = new(rb.linearVelocity.x, vertical_move_cap, rb.linearVelocity.z);
+        }
+        if (rb.linearVelocity.x >= horizontal_move_cap)
+        {
+            rb.linearVelocity = new(horizontal_move_cap, rb.linearVelocity.y, rb.linearVelocity.z);
+        }
+        if (rb.linearVelocity.z >= horizontal_move_cap)
+        {
+            rb.linearVelocity = new(rb.linearVelocity.x, rb.linearVelocity.y, horizontal_move_cap);
+        }
+
+
+        if (rb.linearVelocity.y == 0)
+            is_grounded = true;
+        else
+            is_grounded = false;
+
         if (move_door)
         {
             Door.transform.position += Vector3.up * Time.deltaTime * 2;
@@ -65,18 +86,24 @@ public class Player : MonoBehaviour
                 move_door = true;
             }
         }
-        if (other.gameObject.tag == "New_Trigger")
+        else if (other.gameObject.tag == "New_Room")
         {
-            Collectable_remaining = 1;
+            Collectable_remaining = 4;
             Collectable_Text.text = "Collectable remaining: " + (Collectable_remaining);
+            other.gameObject.SetActive(false);
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.name == "Floor")
-        {
-            is_grounded = true;
-        }
-    }
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    is_grounded = false;
+    //}
+
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.name == "Floor")
+    //    {
+    //        is_grounded = true;
+    //    }
+    //}
 }
