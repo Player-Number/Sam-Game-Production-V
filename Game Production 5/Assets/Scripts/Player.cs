@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     bool move_door = false;
     bool is_grounded = true;
 
-    float horizontal_move_cap = 3;
+    float horizontal_move_cap = 4;
     float vertical_move_cap = 5;
 
     void Start()
@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(rb.linearVelocity);
         if (Input.GetKey(KeyCode.W))
         {
             rb.AddForce(rb.transform.forward * Time.deltaTime * move_speed);
@@ -49,13 +50,25 @@ public class Player : MonoBehaviour
         {
             rb.linearVelocity = new(rb.linearVelocity.x, vertical_move_cap, rb.linearVelocity.z);
         }
+        //if (rb.linearVelocity.y <= -vertical_move_cap)
+        //{
+        //    rb.linearVelocity = new(rb.linearVelocity.x, -vertical_move_cap, rb.linearVelocity.z);
+        //}
         if (rb.linearVelocity.x >= horizontal_move_cap)
         {
             rb.linearVelocity = new(horizontal_move_cap, rb.linearVelocity.y, rb.linearVelocity.z);
         }
+        if (rb.linearVelocity.x <= -horizontal_move_cap)
+        {
+            rb.linearVelocity = new(-horizontal_move_cap, rb.linearVelocity.y, rb.linearVelocity.z);
+        }
         if (rb.linearVelocity.z >= horizontal_move_cap)
         {
             rb.linearVelocity = new(rb.linearVelocity.x, rb.linearVelocity.y, horizontal_move_cap);
+        }
+        if (rb.linearVelocity.z <= -horizontal_move_cap)
+        {
+            rb.linearVelocity = new(rb.linearVelocity.x, rb.linearVelocity.y, -horizontal_move_cap);
         }
 
 
