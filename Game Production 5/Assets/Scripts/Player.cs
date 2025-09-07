@@ -12,12 +12,13 @@ public class Player : MonoBehaviour
     public float Collectable_remaining = 2;
     float move_speed = 500;
     float Timer = 0;
+    float horizontal_move_cap = 4;
+    float vertical_move_cap = 5;
+    float og_move_speed = 5;
 
     bool move_door = false;
     bool is_grounded = true;
 
-    float horizontal_move_cap = 4;
-    float vertical_move_cap = 5;
 
     void Start()
     {
@@ -43,7 +44,7 @@ public class Player : MonoBehaviour
         {
             rb.AddForce(rb.transform.right * Time.deltaTime * move_speed);
         }
-        if (Input.GetKeyDown(KeyCode.Space) && is_grounded == true)
+        if (Input.GetKey(KeyCode.Space) && is_grounded == true)
         {
             rb.AddForce(Vector3.up * Time.deltaTime * 25000);
             //is_grounded = false;
@@ -112,12 +113,19 @@ public class Player : MonoBehaviour
             other.gameObject.SetActive(false);
             move_door = false;
         }
+        else if (other.gameObject.name == "Mud")
+        {
+            move_speed /= 2;
+        }
     }
 
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    is_grounded = false;
-    //}
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.name == "Mud")
+        {
+            move_speed *= 2;
+        }
+    }
 
     //private void OnCollisionEnter(Collision collision)
     //{
