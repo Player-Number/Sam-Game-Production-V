@@ -27,7 +27,6 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(rb.linearVelocity);
         if (Input.GetKey(KeyCode.W))
         {
             rb.AddForce(rb.transform.forward * Time.deltaTime * move_speed);
