@@ -5,6 +5,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] TMP_Text Collectable_Text;
     [SerializeField] TMP_Text Timer_Text;
+    [SerializeField] Camera Cam;
     public GameObject Door;
 
     Rigidbody rb;
@@ -14,15 +15,18 @@ public class Player : MonoBehaviour
     float Timer = 0;
     float horizontal_move_cap = 4;
     float vertical_move_cap = 5;
-    float og_move_speed = 5;
+    public float dash_force = 30;
+    //float cool_timer = 3;
 
     bool move_door = false;
     bool is_grounded = true;
 
+    Vector3 new_room_trigger_pos;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        new_room_trigger_pos = transform.position;
     }
 
     void Update()
@@ -42,6 +46,25 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             rb.AddForce(rb.transform.right * Time.deltaTime * move_speed);
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            rb.AddForce(rb.transform.right * Time.deltaTime * move_speed);
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            transform.position = new_room_trigger_pos;
+        }
+        //if (Input.GetKeyDown(KeyCode.Mouse1) && dash_cool <= 0)
+        //{
+        //    rb.AddForce(Cam.gameObject.transform.forward * 5000);
+        //    dash_cool = 3;
+        //}
+        //else
+        //    dash_cool -= Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            rb.AddForce(Cam.gameObject.transform.forward * dash_force, ForceMode.Impulse);
         }
         if (Input.GetKey(KeyCode.Space) && is_grounded == true)
         {
@@ -107,14 +130,14 @@ public class Player : MonoBehaviour
         }
         else if (other.gameObject.tag == "New_Room")
         {
-            //Collectable_remaining = 4;
+            new_room_trigger_pos = other.transform.position;
             Collectable_Text.text = "Collectable Remaining: " + (Collectable_remaining);
             other.gameObject.SetActive(false);
             move_door = false;
         }
         else if (other.gameObject.name == "Mud")
         {
-            move_speed /= 2;
+            move_speed /= 3;
         }
     }
 
@@ -122,7 +145,7 @@ public class Player : MonoBehaviour
     {
         if (other.gameObject.name == "Mud")
         {
-            move_speed *= 2;
+            move_speed *= 3;
         }
     }
 

@@ -3301,6 +3301,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player
   Collectable_Text: {fileID: 1968302492}
   Timer_Text: {fileID: 1988836317}
+  Cam: {fileID: 330585545}
   Door: {fileID: 1062419459}
   Collectable_remaining: 2
 --- !u!54 &527534396
