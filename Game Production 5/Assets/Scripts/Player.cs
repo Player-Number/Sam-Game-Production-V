@@ -16,11 +16,13 @@ public class Player : MonoBehaviour
     float Timer = 0;
     float horizontal_move_cap = 4;
     float vertical_move_cap = 5;
-    public float dash_force = 30;
+    float dash_force = 5000;
     float dash_cool = 3;
+    //float mud_timer = 0;
 
     bool move_door = false;
     bool is_grounded = true;
+    //bool can_jump = true;
 
     Vector3 new_room_trigger_pos;
 
@@ -60,7 +62,7 @@ public class Player : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Mouse1) && dash_cool <= 0)
         {
-            rb.AddForce(Cam.gameObject.transform.forward * 5000);
+            rb.AddForce(Cam.gameObject.transform.forward * dash_force);
             dash_cool = 3;
         }
         else if (dash_cool >= 0)
@@ -108,6 +110,17 @@ public class Player : MonoBehaviour
         else
             is_grounded = false;
 
+        //if (mud_timer > 0)
+        //{
+        //    mud_timer -= Time.deltaTime;
+        //    is_grounded = false;
+        //    //if (mud_timer <= 0)
+        //    //{
+        //    //    mud_timer = 1;
+        //    //    can_jump = true;
+        //    //} 
+        //}
+
         if (move_door)
         {
             Door.transform.position += Vector3.up * Time.deltaTime * 2;
@@ -141,10 +154,11 @@ public class Player : MonoBehaviour
             other.gameObject.SetActive(false);
             move_door = false;
         }
-        else if (other.gameObject.name == "Mud")
-        {
-            move_speed /= 3;
-        }
+        //else if (other.gameObject.name == "Mud")
+        //{
+        //    move_speed /= 6;
+        //    mud_timer = 1;
+        //}
         else if (other.gameObject.tag == "Death")
         {
             transform.position = new_room_trigger_pos;
@@ -152,13 +166,13 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.name == "Mud")
-        {
-            move_speed *= 3;
-        }
-    }
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.gameObject.name == "Mud")
+    //    {
+    //        move_speed *= 6;
+    //    }
+    //}
 
     //private void OnCollisionEnter(Collision collision)
     //{
