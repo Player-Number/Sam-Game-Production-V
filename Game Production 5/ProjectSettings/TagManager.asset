@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Collectable
   - New_Room
+  - Death
   layers:
   - Default
   - TransparentFX

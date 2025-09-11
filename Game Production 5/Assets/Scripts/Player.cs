@@ -28,6 +28,8 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         new_room_trigger_pos = transform.position;
+        Collectable_Text.text = "Collectable Remaining: " + (Collectable_remaining);
+        Dash_cool_Text.text = "Dash Cooldown: " + dash_cool.ToString("F0");
     }
 
     void Update()
@@ -142,6 +144,11 @@ public class Player : MonoBehaviour
         else if (other.gameObject.name == "Mud")
         {
             move_speed /= 3;
+        }
+        else if (other.gameObject.tag == "Death")
+        {
+            transform.position = new_room_trigger_pos;
+            rb.linearVelocity = Vector3.zero;
         }
     }
 
