@@ -22,7 +22,7 @@ public class Entered_New_Room : MonoBehaviour
         {
             other.GetComponent<Player>().Door = Door;
             other.GetComponent<Player>().Collectable_remaining = Collectables.transform.childCount;
-            //gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
     }
 }
