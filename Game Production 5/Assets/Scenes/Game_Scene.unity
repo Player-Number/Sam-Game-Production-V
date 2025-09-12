@@ -3739,8 +3739,8 @@ MonoBehaviour:
   Timer_Text: {fileID: 611893231}
   Dash_cool_Text: {fileID: 2136209314}
   Cam: {fileID: 330585545}
-  Look_Script: {fileID: 330585548}
   Pause_Menu: {fileID: 1761667643}
+  input_actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   Door: {fileID: 1062419459}
   Collectable_remaining: 2
 --- !u!54 &527534396
@@ -13519,8 +13519,8 @@ MonoBehaviour:
   Timer_Text: {fileID: 1415152336}
   Dash_cool_Text: {fileID: 587388512}
   Cam: {fileID: 161251106}
-  Look_Script: {fileID: 0}
   Pause_Menu: {fileID: 0}
+  input_actions: {fileID: 0}
   Door: {fileID: 1062419459}
   Collectable_remaining: 2
 --- !u!4 &1602315203
