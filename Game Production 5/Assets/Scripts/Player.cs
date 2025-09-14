@@ -108,6 +108,7 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) && is_grounded == true)
         {
             rb.AddForce(Vector3.up * 500);
+            //rb.linearVelocity = Vector3.up * 500;
             //is_grounded = false;
         }
         if (rb.linearVelocity.y == 0)
@@ -115,16 +116,15 @@ public class Player : MonoBehaviour
         else
             is_grounded = false;
 
-        //Dev only
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-            transform.position = (transform.position + Cam.gameObject.transform.forward * 5);
+            transform.position = (transform.position + Cam.gameObject.transform.forward * 5); //Dev only
         }
     }
 
     private void Move_Cap()
     {
-        if (rb.linearVelocity.y >= vertical_move_cap)
+        if (rb.linearVelocity.y >= vertical_move_cap) //rb.maxLinearVelocity
             rb.linearVelocity = new(rb.linearVelocity.x, vertical_move_cap, rb.linearVelocity.z);
         //if (rb.linearVelocity.y <= -vertical_move_cap)
         //    rb.linearVelocity = new(rb.linearVelocity.x, -vertical_move_cap, rb.linearVelocity.z);
@@ -167,14 +167,14 @@ public class Player : MonoBehaviour
             transform.position = new_room_trigger_pos;
             rb.linearVelocity = Vector3.zero;
         }
-        else if (other.gameObject.name == "Bounce_Pad")
+        else if (other.gameObject.tag == "Bounce_Pad")
         {
-            rb.AddForce(Vector3.up * 5000);
+            rb.AddForce(Vector3.up * 10000);
         }
-        else if (other.gameObject.name == "Speed_Area")
-        {
-            rb_move_speed *= 2;
-        }
+        //else if (other.gameObject.name == "Speed_Area")
+        //{
+        //    rb_move_speed *= 2;
+        //}
     }
 
     private void OnTriggerExit(Collider other)
