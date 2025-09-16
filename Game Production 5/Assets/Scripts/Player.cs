@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] TMP_Text Dash_cool_Text;
     [SerializeField] Camera Cam;
     [SerializeField] GameObject Pause_Menu;
+    [SerializeField] GameObject Speedlines;
     [SerializeField] InputActionAsset input_actions;
 
     public GameObject Door;
@@ -23,7 +24,7 @@ public class Player : MonoBehaviour
     float vertical_move_cap = 5;
     float dash_force = 5000;
     float dash_cool = 0;
-    //float mud_timer = 0;
+    float Speedlines_timer = 0;
 
     bool move_door = false;
     bool is_grounded = true;
@@ -95,11 +96,19 @@ public class Player : MonoBehaviour
         {
             rb.AddForce(Cam.gameObject.transform.forward * dash_force, ForceMode.Force);
             dash_cool = 3;
+            Speedlines.SetActive(true);
+            Speedlines_timer = 0.5f;
         }
         else if (dash_cool >= 0)
         {
             dash_cool -= Time.deltaTime;
+            Speedlines_timer -= Time.deltaTime;
             Dash_cool_Text.text = "Dash Cooldown: " + dash_cool.ToString("F0");
+            if (Speedlines_timer <= 0)
+            {
+                Speedlines.SetActive(false);
+            }
+
         }
         //if (Input.GetKeyDown(KeyCode.Mouse1))
         //{
