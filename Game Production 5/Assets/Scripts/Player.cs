@@ -42,6 +42,7 @@ public class Player : MonoBehaviour
         Collectable_Text.text = "Collectable Remaining: " + (Collectable_remaining);
         Dash_cool_Text.text = "Dash Cooldown: " + dash_cool.ToString("F0");
         Time.timeScale = 1.0f;
+        
         //move_input = input_actions.FindAction("Move");
         //Cursor.visible = false;
         //Cursor.lockState = CursorLockMode.Locked;
