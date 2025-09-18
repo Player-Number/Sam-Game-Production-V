@@ -6,10 +6,12 @@ public class Player : MonoBehaviour
 {
     [SerializeField] TMP_Text Collectable_Text;
     [SerializeField] TMP_Text Timer_Text;
+    [SerializeField] TMP_Text Final_Timer_Text;
     [SerializeField] TMP_Text Dash_cool_Text;
     [SerializeField] Camera Cam;
     [SerializeField] GameObject Pause_Menu;
     [SerializeField] GameObject Speedlines;
+    [SerializeField] GameObject End_Screen;
     [SerializeField] InputActionAsset input_actions;
 
     public GameObject Door;
@@ -126,10 +128,10 @@ public class Player : MonoBehaviour
         else
             is_grounded = false;
 
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            transform.position = (transform.position + Cam.gameObject.transform.forward * 5); //Dev only
-        }
+        //if (Input.GetKeyDown(KeyCode.Q))
+        //{
+        //    transform.position = (transform.position + Cam.gameObject.transform.forward * 5); //Dev only
+        //}
     }
 
     private void Move_Cap()
@@ -180,6 +182,12 @@ public class Player : MonoBehaviour
         else if (other.gameObject.tag == "Bounce_Pad")
         {
             rb.AddForce(Vector3.up * 10000);
+        }
+        else if (other.gameObject.name == "Win")
+        {
+            End_Screen.SetActive(true);
+            Final_Timer_Text.text = "Final TImer: " + Timer.ToString("F2");
+            other.gameObject.SetActive(false);
         }
         //else if (other.gameObject.name == "Speed_Area")
         //{
