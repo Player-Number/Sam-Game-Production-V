@@ -8,13 +8,19 @@ public class Player : MonoBehaviour
     [SerializeField] TMP_Text Timer_Text;
     [SerializeField] TMP_Text Final_Timer_Text;
     [SerializeField] TMP_Text Dash_cool_Text;
+    [SerializeField] TMP_Text Best_time_Text;
+    [SerializeField] TMP_Text Best_time_Meni_Menu_Text;
+    [SerializeField] TMP_Text Best_time_end_Text;
     [SerializeField] Camera Cam;
     [SerializeField] GameObject Pause_Menu;
     [SerializeField] GameObject Speedlines;
     [SerializeField] GameObject End_Screen;
+    //[SerializeField] GameObject Player_UI;
+    [SerializeField] GameObject menu;
     [SerializeField] InputActionAsset input_actions;
 
     public GameObject Door;
+    public float best_time = 0;
 
     Rigidbody rb;
 
@@ -30,7 +36,6 @@ public class Player : MonoBehaviour
 
     bool move_door = false;
     bool is_grounded = true;
-    //bool can_jump = true;
 
     Vector3 new_room_trigger_pos;
 
@@ -43,7 +48,7 @@ public class Player : MonoBehaviour
         new_room_trigger_pos = transform.position;
         Collectable_Text.text = "Collectable Remaining: " + (Collectable_remaining);
         Dash_cool_Text.text = "Dash Cooldown: " + dash_cool.ToString("F0");
-        Time.timeScale = 1.0f;
+        //Time.timeScale = 0;
         
         //move_input = input_actions.FindAction("Move");
         //Cursor.visible = false;
@@ -65,6 +70,10 @@ public class Player : MonoBehaviour
                 //Door.gameObject.SetActive(false);
             }
         }
+        if (transform.position == Vector3.zero)
+        {
+            Timer = 0;
+        }
 
         Timer += Time.deltaTime;
         Timer_Text.text = Timer.ToString("F2");
@@ -84,16 +93,9 @@ public class Player : MonoBehaviour
 
     private void Other_Actions()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.Alpha0))
         {
             transform.position = new_room_trigger_pos;
-        }
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            Pause_Menu.gameObject.SetActive(true);
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-            Time.timeScale = 0;
         }
         if (Input.GetKeyDown(KeyCode.Mouse1) && dash_cool <= 0)
         {
@@ -111,16 +113,10 @@ public class Player : MonoBehaviour
             {
                 Speedlines.SetActive(false);
             }
-
         }
-        //if (Input.GetKeyDown(KeyCode.Mouse1))
-        //{
-        //    rb.AddForce(Cam.gameObject.transform.forward * dash_force, ForceMode.Impulse);
-        //}
         if (Input.GetKey(KeyCode.Space) && is_grounded == true)
         {
             rb.AddForce(Vector3.up * 750);
-            //rb.linearVelocity = Vector3.up * 500;
             //is_grounded = false;
         }
         if (rb.linearVelocity.y == 0)
@@ -188,6 +184,14 @@ public class Player : MonoBehaviour
             End_Screen.SetActive(true);
             Final_Timer_Text.text = "Final TImer: " + Timer.ToString("F2");
             other.gameObject.SetActive(false);
+            menu.GetComponent<Menu>().disable_pause = true;
+            if (Timer > best_time)
+            {
+                best_time = Timer;
+                Best_time_Text.text = "Best Time " + best_time.ToString("F2");
+                Best_time_Meni_Menu_Text.text = "Best Time " + best_time.ToString("F2");
+                Best_time_end_Text.text = "Best Time " + best_time.ToString("F2");
+            }
         }
         //else if (other.gameObject.name == "Speed_Area")
         //{
