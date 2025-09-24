@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
     float Timer = 0;
     float horizontal_move_cap = 4;
     float vertical_move_cap = 5;
-    float dash_force = 7500;
+    float dash_force = 150;
     float dash_cool = 0;
     float Speedlines_timer = 0;
 
@@ -97,7 +97,7 @@ public class Player : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Mouse1) && dash_cool <= 0)
         {
-            rb.AddForce(Cam.gameObject.transform.forward * dash_force, ForceMode.Force);
+            rb.AddForce(Cam.gameObject.transform.forward * dash_force, ForceMode.Impulse);
             dash_cool = 3;
             Speedlines.SetActive(true);
             Speedlines_timer = 0.5f;
@@ -181,7 +181,7 @@ public class Player : MonoBehaviour
         }
         else if (other.gameObject.tag == "Bounce_Pad")
         {
-            rb.AddForce(Vector3.up * 10000);
+            rb.AddForce(Vector3.up * 200, ForceMode.Impulse);
         }
         else if (other.gameObject.name == "Win")
         {
