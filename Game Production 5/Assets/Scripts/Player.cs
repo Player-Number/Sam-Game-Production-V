@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
     float Timer = 0;
     float horizontal_move_cap = 4;
     float vertical_move_cap = 5;
-    float dash_force = 5000;
+    float dash_force = 7500;
     float dash_cool = 0;
     float Speedlines_timer = 0;
 
@@ -119,7 +119,7 @@ public class Player : MonoBehaviour
         //}
         if (Input.GetKey(KeyCode.Space) && is_grounded == true)
         {
-            rb.AddForce(Vector3.up * 500);
+            rb.AddForce(Vector3.up * 750);
             //rb.linearVelocity = Vector3.up * 500;
             //is_grounded = false;
         }
