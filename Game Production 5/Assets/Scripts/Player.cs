@@ -70,7 +70,7 @@ public class Player : MonoBehaviour
                 //Door.gameObject.SetActive(false);
             }
         }
-        if (transform.position == Vector3.zero)
+        if (transform.position == new Vector3(0,1,0))
         {
             Timer = 0;
         }
@@ -185,6 +185,9 @@ public class Player : MonoBehaviour
             Final_Timer_Text.text = "Final TImer: " + Timer.ToString("F2");
             other.gameObject.SetActive(false);
             menu.GetComponent<Menu>().disable_pause = true;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            //transform.position = Vector3.zero;
             if (Timer > best_time)
             {
                 best_time = Timer;
@@ -193,10 +196,6 @@ public class Player : MonoBehaviour
                 Best_time_end_Text.text = "Best Time " + best_time.ToString("F2");
             }
         }
-        //else if (other.gameObject.name == "Speed_Area")
-        //{
-        //    rb_move_speed *= 2;
-        //}
     }
 
     private void OnTriggerExit(Collider other)
