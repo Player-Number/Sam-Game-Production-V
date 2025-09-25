@@ -8,15 +8,15 @@ public class Player : MonoBehaviour
     [SerializeField] TMP_Text Timer_Text;
     [SerializeField] TMP_Text Final_Timer_Text;
     [SerializeField] TMP_Text Dash_cool_Text;
-    [SerializeField] TMP_Text Best_time_Text;
-    [SerializeField] TMP_Text Best_time_Meni_Menu_Text;
-    [SerializeField] TMP_Text Best_time_end_Text;
+    //[SerializeField] TMP_Text Best_time_Text;
+    //[SerializeField] TMP_Text Best_time_Meni_Menu_Text;
+    //[SerializeField] TMP_Text Best_time_end_Text;
     [SerializeField] Camera Cam;
     [SerializeField] GameObject Pause_Menu;
     [SerializeField] GameObject Speedlines;
     [SerializeField] GameObject End_Screen;
     //[SerializeField] GameObject Player_UI;
-    [SerializeField] GameObject menu;
+    //[SerializeField] GameObject menu;
     [SerializeField] InputActionAsset input_actions;
 
     public GameObject Door;
@@ -48,8 +48,8 @@ public class Player : MonoBehaviour
         new_room_trigger_pos = transform.position;
         Collectable_Text.text = "Collectable Remaining: " + (Collectable_remaining);
         Dash_cool_Text.text = "Dash Cooldown: " + dash_cool.ToString("F0");
-        //Time.timeScale = 0;
-        
+        Time.timeScale = 1;
+
         //move_input = input_actions.FindAction("Move");
         //Cursor.visible = false;
         //Cursor.lockState = CursorLockMode.Locked;
@@ -124,6 +124,14 @@ public class Player : MonoBehaviour
         else
             is_grounded = false;
 
+        if (Input.GetKeyDown(KeyCode.P)) // && disable_pause == false
+        {
+            Pause_Menu.gameObject.SetActive(true);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 0;
+        }
+
         //if (Input.GetKeyDown(KeyCode.Q))
         //{
         //    transform.position = (transform.position + Cam.gameObject.transform.forward * 5); //Dev only
@@ -184,17 +192,17 @@ public class Player : MonoBehaviour
             End_Screen.SetActive(true);
             Final_Timer_Text.text = "Final TImer: " + Timer.ToString("F2");
             other.gameObject.SetActive(false);
-            menu.GetComponent<Menu>().disable_pause = true;
+            //menu.GetComponent<Menu>().disable_pause = true;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             //transform.position = Vector3.zero;
-            if (Timer > best_time)
-            {
-                best_time = Timer;
-                Best_time_Text.text = "Best Time " + best_time.ToString("F2");
-                Best_time_Meni_Menu_Text.text = "Best Time " + best_time.ToString("F2");
-                Best_time_end_Text.text = "Best Time " + best_time.ToString("F2");
-            }
+            //if (Timer > best_time)
+            //{
+            //    best_time = Timer;
+            //    Best_time_Text.text = "Best Time " + best_time.ToString("F2");
+            //    Best_time_Meni_Menu_Text.text = "Best Time " + best_time.ToString("F2");
+            //    Best_time_end_Text.text = "Best Time " + best_time.ToString("F2");
+            //}
         }
     }
 

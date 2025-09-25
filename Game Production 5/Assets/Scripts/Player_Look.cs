@@ -4,7 +4,7 @@ public class Player_Look : MonoBehaviour
 {
     [SerializeField] Transform player_body;
     float min_view_dis = 85f;
-    float mouse_sen = 200f;
+    float mouse_sen = 250f;
     float x_rot = 0f;
     void Start()
     {
