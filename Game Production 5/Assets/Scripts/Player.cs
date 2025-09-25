@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
     float horizontal_move_cap = 4;
     float vertical_move_cap = 5;
     float dash_force = 150;
+    float jump_force = 500;
     float dash_cool = 0;
     float Speedlines_timer = 0;
 
@@ -97,6 +98,10 @@ public class Player : MonoBehaviour
         {
             transform.position = new_room_trigger_pos;
         }
+        //if (Input.GetKeyDown(KeyCode.Alpha9))
+        //{
+        //    transform.position = new(0, 2, 200);
+        //}
         if (Input.GetKeyDown(KeyCode.Mouse1) && dash_cool <= 0)
         {
             rb.AddForce(Cam.gameObject.transform.forward * dash_force, ForceMode.Impulse);
@@ -116,7 +121,7 @@ public class Player : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.Space) && is_grounded == true)
         {
-            rb.AddForce(Vector3.up * 750);
+            rb.AddForce(Vector3.up * jump_force);
             //is_grounded = false;
         }
         if (rb.linearVelocity.y == 0)
@@ -190,7 +195,7 @@ public class Player : MonoBehaviour
         else if (other.gameObject.name == "Win")
         {
             End_Screen.SetActive(true);
-            Final_Timer_Text.text = "Final TImer: " + Timer.ToString("F2");
+            Final_Timer_Text.text = "Final Timer: " + Timer.ToString("F2");
             other.gameObject.SetActive(false);
             //menu.GetComponent<Menu>().disable_pause = true;
             Cursor.visible = true;
