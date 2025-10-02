@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -8,17 +9,17 @@ public class Player : MonoBehaviour
     [SerializeField] TMP_Text Timer_Text;
     [SerializeField] TMP_Text Final_Timer_Text;
     [SerializeField] TMP_Text Dash_cool_Text;
-    //[SerializeField] TMP_Text Best_time_Text;
+    [SerializeField] TMP_Text Best_time_Text;
     //[SerializeField] TMP_Text Best_time_Meni_Menu_Text;
-    //[SerializeField] TMP_Text Best_time_end_Text;
+    [SerializeField] TMP_Text Best_time_end_Text;
     [SerializeField] Camera Cam;
     [SerializeField] GameObject Pause_Menu;
     [SerializeField] GameObject Speedlines;
     [SerializeField] GameObject End_Screen;
     //[SerializeField] GameObject Player_UI;
-    //[SerializeField] GameObject menu;
     [SerializeField] InputActionAsset input_actions;
 
+    GameObject Menu;
     public GameObject Door;
     public float best_time = 0;
 
@@ -50,7 +51,10 @@ public class Player : MonoBehaviour
         Collectable_Text.text = "Collectable Remaining: " + (Collectable_remaining);
         Dash_cool_Text.text = "Dash Cooldown: " + dash_cool.ToString("F0");
         Time.timeScale = 1;
-
+        Menu = GameObject.Find("Menu");
+        best_time = Menu.GetComponent<Menu>().Best_time;
+        Best_time_Text.text = "Best Time " + Menu.GetComponent<Menu>().Best_time.ToString("F2");
+        Menu.GetComponent<Menu>().Main_Menu.gameObject.SetActive(false);
         //move_input = input_actions.FindAction("Move");
         //Cursor.visible = false;
         //Cursor.lockState = CursorLockMode.Locked;
@@ -71,10 +75,10 @@ public class Player : MonoBehaviour
                 //Door.gameObject.SetActive(false);
             }
         }
-        if (transform.position == new Vector3(0,1,0))
-        {
-            Timer = 0;
-        }
+        //if (transform.position == new Vector3(0,1,0))
+        //{
+        //    Timer = 0;
+        //}
 
         Timer += Time.deltaTime;
         Timer_Text.text = Timer.ToString("F2");
@@ -98,10 +102,10 @@ public class Player : MonoBehaviour
         {
             transform.position = new_room_trigger_pos;
         }
-        //if (Input.GetKeyDown(KeyCode.Alpha9))
-        //{
-        //    transform.position = new(0, 2, 200);
-        //}
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            transform.position = new(0, 2, 200); // dev
+        }
         if (Input.GetKeyDown(KeyCode.Mouse1) && dash_cool <= 0)
         {
             rb.AddForce(Cam.gameObject.transform.forward * dash_force, ForceMode.Impulse);
@@ -137,7 +141,7 @@ public class Player : MonoBehaviour
             Time.timeScale = 0;
         }
 
-        //if (Input.GetKeyDown(KeyCode.Q))
+        //if (Input.GetKeyDown(KeyCode.Mouse0))
         //{
         //    transform.position = (transform.position + Cam.gameObject.transform.forward * 5); //Dev only
         //}
@@ -201,15 +205,45 @@ public class Player : MonoBehaviour
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             //transform.position = Vector3.zero;
-            //if (Timer > best_time)
-            //{
-            //    best_time = Timer;
-            //    Best_time_Text.text = "Best Time " + best_time.ToString("F2");
-            //    Best_time_Meni_Menu_Text.text = "Best Time " + best_time.ToString("F2");
-            //    Best_time_end_Text.text = "Best Time " + best_time.ToString("F2");
-            //}
+            if (Timer > best_time)
+            {
+                best_time = Timer;
+                Best_time_end_Text.text = "Best Time: " + best_time.ToString("F2");
+                Menu.GetComponent<Menu>().Best_time = best_time;
+                //Best_time_Menu_Menu_Text.text = "Best Time " + best_time.ToString("F2");
+            }
+            else
+            {
+                Best_time_end_Text.text = "Best Time: " + Menu.GetComponent<Menu>().Best_time.ToString("F2");
+            }
         }
     }
+
+    public void Resume()
+    {
+        Time.timeScale = 1.0f;
+        Pause_Menu.SetActive(false);
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void To_Main_Menu()
+    {
+        //Time.timeScale = 0;
+        //Player.transform.position = new(0,1,0);
+        //Player_UI.SetActive(false);
+        //Pause_Menu.SetActive(false);
+        //End_Screen.SetActive(false);
+        //disable_pause = true;
+        //In_main_menu = true;
+        //Main_Menu.SetActive(true);
+
+        SceneManager.LoadScene("Main_Menu");
+        Best_time_Text.gameObject.SetActive(true);
+        Menu.GetComponent<Menu>().Best_time_Text.text = "Best Time: " + best_time.ToString("F2");
+        Menu.GetComponent<Menu>().Main_Menu.gameObject.SetActive(true);
+    }
+
 
     private void OnTriggerExit(Collider other)
     {

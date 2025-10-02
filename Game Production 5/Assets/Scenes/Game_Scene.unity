@@ -801,7 +801,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &56172262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -814,7 +814,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4158c9f64a8fd0c4bb0e52112b6f2425, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Menu
-  Pause_Menu: {fileID: 1761667643}
+  Best_time_Text: {fileID: 0}
+  Best_time: 0
 --- !u!4 &56172263
 Transform:
   m_ObjectHideFlags: 0
@@ -5589,7 +5590,7 @@ GameObject:
   - component: {fileID: 481433358}
   - component: {fileID: 481433357}
   m_Layer: 5
-  m_Name: Timer
+  m_Name: Final Time
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6721,6 +6722,8 @@ MonoBehaviour:
   Timer_Text: {fileID: 611893231}
   Final_Timer_Text: {fileID: 481433357}
   Dash_cool_Text: {fileID: 2136209314}
+  Best_time_Text: {fileID: 1041842141}
+  Best_time_end_Text: {fileID: 679544682}
   Cam: {fileID: 330585545}
   Pause_Menu: {fileID: 1761667643}
   Speedlines: {fileID: 625016834}
@@ -7630,8 +7633,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 56172262}
-        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
+      - m_Target: {fileID: 527534395}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
         m_MethodName: Resume
         m_Mode: 1
         m_Arguments:
@@ -9078,7 +9081,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &679544681
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9395,7 +9398,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &692154401
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12678,8 +12681,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 56172262}
-        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
+      - m_Target: {fileID: 527534395}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
         m_MethodName: To_Main_Menu
         m_Mode: 1
         m_Arguments:
@@ -16722,8 +16725,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 56172262}
-        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
+      - m_Target: {fileID: 527534395}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
         m_MethodName: To_Main_Menu
         m_Mode: 1
         m_Arguments:
