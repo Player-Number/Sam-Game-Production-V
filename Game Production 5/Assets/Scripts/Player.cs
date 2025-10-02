@@ -43,6 +43,15 @@ public class Player : MonoBehaviour
     //InputAction move_input;
     //Vector2 dir;
 
+    [Header("FOV Settings")]
+    public float max_speed = 10f; 
+    public float min_FOV = 60f; 
+    public float max_FOV = 90f; 
+    public float FOV_change_speed = 5f; 
+    public float current_FOV_velocity = 60f;
+    public float smooth_time = 0.5f;
+    //public float min_speed = 0f;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -54,6 +63,7 @@ public class Player : MonoBehaviour
         best_time = Menu.GetComponent<Menu>().Best_time;
         Best_time_Text.text = "Best Time " + Menu.GetComponent<Menu>().Best_time.ToString("F2");
         Menu.GetComponent<Menu>().Main_Menu.gameObject.SetActive(false);
+
         //move_input = input_actions.FindAction("Move");
         //Cursor.visible = false;
         //Cursor.lockState = CursorLockMode.Locked;
@@ -78,6 +88,14 @@ public class Player : MonoBehaviour
 
         Timer += Time.deltaTime;
         Timer_Text.text = Timer.ToString("F2");
+
+        // FOV based on speed
+        float current_speed = rb.linearVelocity.magnitude;
+        float speed_normalized = Mathf.Clamp01(current_speed / max_speed);
+        float target_FOV = Mathf.Lerp(min_FOV, max_FOV, speed_normalized);
+
+        Cam.fieldOfView = Mathf.SmoothDamp(Cam.fieldOfView, target_FOV, ref current_FOV_velocity, smooth_time);
+
     }
 
     private void Move()
@@ -98,24 +116,26 @@ public class Player : MonoBehaviour
             transform.position = new_room_trigger_pos;
         if (Input.GetKeyDown(KeyCode.Alpha9))
             transform.position = new(0, 2, 200); // dev
+
         if (Input.GetKeyDown(KeyCode.Mouse1) && dash_cool <= 0)
         {
-            rb.AddForce(Cam.gameObject.transform.forward * dash_force, ForceMode.Impulse);
+            rb.AddForce(Cam.gameObject.transform.forward * dash_force, ForceMode.Impulse); // dash
             dash_cool = 3;
             Speedlines.SetActive(true);
             Speedlines_timer = 0.5f;
         }
-        else if (dash_cool >= 0)
+        else if (dash_cool > 0)
         {
             dash_cool -= Time.deltaTime;
             Speedlines_timer -= Time.deltaTime;
-            Dash_cool_Text.text = "Dash Cooldown: " + dash_cool.ToString("F0");
+            Dash_cool_Text.text = "Dash Cooldown: " + dash_cool.ToString("F0"); // F3
             if (Speedlines_timer <= 0)
-            {
                 Speedlines.SetActive(false);
-            }
         }
-        if (Input.GetKey(KeyCode.Space) && is_grounded == true)
+        //else if (dash_cool < 0)
+        //    dash_cool = 0;
+
+        if (Input.GetKey(KeyCode.Space) && is_grounded == true) // jump
         {
             rb.AddForce(Vector3.up * jump_force);
             //is_grounded = false;
@@ -125,7 +145,7 @@ public class Player : MonoBehaviour
         else
             is_grounded = false;
 
-        if (Input.GetKeyDown(KeyCode.P) && disable_pause == false)
+        if (Input.GetKeyDown(KeyCode.P) && disable_pause == false) // pause 
         {
             Pause_Menu.gameObject.SetActive(true);
             Cursor.visible = true;
@@ -241,11 +261,11 @@ public class Player : MonoBehaviour
 
     private void Unused()
     {
-        if (Input.GetKey(KeyCode.W))
-        {
-            transform.position = (rb.transform.forward * Time.deltaTime);
-            transform.position = Vector3.up * Time.deltaTime;
-        }
+        //if (Input.GetKey(KeyCode.W))
+        //{
+        //    transform.position = (rb.transform.forward * Time.deltaTime);
+        //    transform.position = Vector3.up * Time.deltaTime;
+        //}
 
         //if (mud_timer > 0)
         //{
@@ -257,5 +277,13 @@ public class Player : MonoBehaviour
         //    //    can_jump = true;
         //    //} 
         //}
+
+        // Normalize speed to a 0-1 ratio
+        //float speed_ratio = Mathf.InverseLerp(min_speed, max_speed, current_speed);
+
+        //// Calculate the target FOV based on the speed ratio
+        //float target_FOV = Mathf.Lerp(min_FOV, max_FOV, speed_ratio);
+
+        //Cam.fieldOfView = Mathf.Lerp(Cam.fieldOfView, target_FOV, Time.deltaTime * FOV_change_speed);
     }
 }
