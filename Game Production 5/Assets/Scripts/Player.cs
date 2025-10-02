@@ -10,24 +10,22 @@ public class Player : MonoBehaviour
     [SerializeField] TMP_Text Final_Timer_Text;
     [SerializeField] TMP_Text Dash_cool_Text;
     [SerializeField] TMP_Text Best_time_Text;
-    //[SerializeField] TMP_Text Best_time_Meni_Menu_Text;
     [SerializeField] TMP_Text Best_time_end_Text;
     [SerializeField] Camera Cam;
     [SerializeField] GameObject Pause_Menu;
     [SerializeField] GameObject Speedlines;
     [SerializeField] GameObject End_Screen;
-    //[SerializeField] GameObject Player_UI;
     [SerializeField] InputActionAsset input_actions;
 
-    GameObject Menu;
     public GameObject Door;
-    public float best_time = 0;
+
+    GameObject Menu;
 
     Rigidbody rb;
 
+    public float best_time = 0;
     public float Collectable_remaining = 2;
     float rb_move_speed = 500;
-    //float move_speed = 10;
     float Timer = 0;
     float horizontal_move_cap = 4;
     float vertical_move_cap = 5;
@@ -38,6 +36,7 @@ public class Player : MonoBehaviour
 
     bool move_door = false;
     bool is_grounded = true;
+    bool disable_pause = false;
 
     Vector3 new_room_trigger_pos;
 
@@ -72,13 +71,10 @@ public class Player : MonoBehaviour
             if (Door.transform.position.y >= 6.5f)
             {
                 move_door = false;
-                //Door.gameObject.SetActive(false);
             }
         }
         //if (transform.position == new Vector3(0,1,0))
-        //{
         //    Timer = 0;
-        //}
 
         Timer += Time.deltaTime;
         Timer_Text.text = Timer.ToString("F2");
@@ -99,13 +95,9 @@ public class Player : MonoBehaviour
     private void Other_Actions()
     {
         if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
             transform.position = new_room_trigger_pos;
-        }
         if (Input.GetKeyDown(KeyCode.Alpha9))
-        {
             transform.position = new(0, 2, 200); // dev
-        }
         if (Input.GetKeyDown(KeyCode.Mouse1) && dash_cool <= 0)
         {
             rb.AddForce(Cam.gameObject.transform.forward * dash_force, ForceMode.Impulse);
@@ -133,26 +125,21 @@ public class Player : MonoBehaviour
         else
             is_grounded = false;
 
-        if (Input.GetKeyDown(KeyCode.P)) // && disable_pause == false
+        if (Input.GetKeyDown(KeyCode.P) && disable_pause == false)
         {
             Pause_Menu.gameObject.SetActive(true);
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0;
         }
-
         //if (Input.GetKeyDown(KeyCode.Mouse0))
-        //{
         //    transform.position = (transform.position + Cam.gameObject.transform.forward * 5); //Dev only
-        //}
     }
 
     private void Move_Cap()
     {
         if (rb.linearVelocity.y >= vertical_move_cap) //rb.maxLinearVelocity
             rb.linearVelocity = new(rb.linearVelocity.x, vertical_move_cap, rb.linearVelocity.z);
-        //if (rb.linearVelocity.y <= -vertical_move_cap)
-        //    rb.linearVelocity = new(rb.linearVelocity.x, -vertical_move_cap, rb.linearVelocity.z);
         if (rb.linearVelocity.x >= horizontal_move_cap)
             rb.linearVelocity = new(horizontal_move_cap, rb.linearVelocity.y, rb.linearVelocity.z);
         if (rb.linearVelocity.x <= -horizontal_move_cap)
@@ -171,9 +158,7 @@ public class Player : MonoBehaviour
             Collectable_Text.text = "Collectable Remaining: " + (Collectable_remaining);
             other.gameObject.SetActive(false);
             if (Collectable_remaining <= 0)
-            {
                 move_door = true;
-            }
         }
         else if (other.gameObject.tag == "New_Room")
         {
@@ -182,11 +167,6 @@ public class Player : MonoBehaviour
             other.gameObject.SetActive(false);
             move_door = false;
         }
-        //else if (other.gameObject.name == "Mud")
-        //{
-        //    move_speed /= 6;
-        //    mud_timer = 1;
-        //}
         else if (other.gameObject.tag == "Death")
         {
             transform.position = new_room_trigger_pos;
@@ -201,21 +181,17 @@ public class Player : MonoBehaviour
             End_Screen.SetActive(true);
             Final_Timer_Text.text = "Final Timer: " + Timer.ToString("F2");
             other.gameObject.SetActive(false);
-            //menu.GetComponent<Menu>().disable_pause = true;
+            disable_pause = true;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
-            //transform.position = Vector3.zero;
             if (Timer > best_time)
             {
                 best_time = Timer;
                 Best_time_end_Text.text = "Best Time: " + best_time.ToString("F2");
                 Menu.GetComponent<Menu>().Best_time = best_time;
-                //Best_time_Menu_Menu_Text.text = "Best Time " + best_time.ToString("F2");
             }
             else
-            {
                 Best_time_end_Text.text = "Best Time: " + Menu.GetComponent<Menu>().Best_time.ToString("F2");
-            }
         }
     }
 
@@ -229,22 +205,11 @@ public class Player : MonoBehaviour
 
     public void To_Main_Menu()
     {
-        //Time.timeScale = 0;
-        //Player.transform.position = new(0,1,0);
-        //Player_UI.SetActive(false);
-        //Pause_Menu.SetActive(false);
-        //End_Screen.SetActive(false);
-        //disable_pause = true;
-        //In_main_menu = true;
-        //Main_Menu.SetActive(true);
-
         SceneManager.LoadScene("Main_Menu");
         Best_time_Text.gameObject.SetActive(true);
         Menu.GetComponent<Menu>().Best_time_Text.text = "Best Time: " + best_time.ToString("F2");
         Menu.GetComponent<Menu>().Main_Menu.gameObject.SetActive(true);
     }
-
-
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.name == "Speed_Area")
