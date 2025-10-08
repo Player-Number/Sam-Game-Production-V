@@ -16,6 +16,10 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject Speedlines;
     [SerializeField] GameObject End_Screen;
     [SerializeField] InputActionAsset input_actions;
+    
+    [SerializeField] AudioSource Collect_sfx;
+    [SerializeField] AudioSource Win_sfx;
+    [SerializeField] AudioSource Gameplay_ost;
 
     public GameObject Door;
 
@@ -152,8 +156,8 @@ public class Player : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0;
         }
-        //if (Input.GetKeyDown(KeyCode.Mouse0))
-        //    transform.position = (transform.position + Cam.gameObject.transform.forward * 5); //Dev only
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+            transform.position = (transform.position + Cam.gameObject.transform.forward * 10); // Dev only
     }
 
     private void Move_Cap()
@@ -177,6 +181,7 @@ public class Player : MonoBehaviour
             Collectable_remaining -= 1;
             Collectable_Text.text = "Collectable Remaining: " + (Collectable_remaining);
             other.gameObject.SetActive(false);
+            Collect_sfx.Play();
             if (Collectable_remaining <= 0)
                 move_door = true;
         }
@@ -196,7 +201,7 @@ public class Player : MonoBehaviour
         {
             rb.AddForce(Vector3.up * 200, ForceMode.Impulse);
         }
-        else if (other.gameObject.name == "Win")
+        else if (other.gameObject.name == "Win_Trigger")
         {
             End_Screen.SetActive(true);
             Final_Timer_Text.text = "Final Timer: " + Timer.ToString("F2");
@@ -204,6 +209,9 @@ public class Player : MonoBehaviour
             disable_pause = true;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
+            Win_sfx.Play();
+            Gameplay_ost.Stop();
+            Time.timeScale = 0;
             if (Timer > best_time)
             {
                 best_time = Timer;
