@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
+    [SerializeField] AudioSource button_pressed;
     public TMP_Text Best_time_Text;
     public Canvas Main_Menu;
     public float Best_time = 0;
@@ -33,10 +34,12 @@ public class Menu : MonoBehaviour
     public void To_Game()
     {
         SceneManager.LoadScene("Game_Scene");
+        button_pressed.Play();
     }
 
     public void Quit()
     {
+        button_pressed.Play();
         Application.Quit();
     }
 }

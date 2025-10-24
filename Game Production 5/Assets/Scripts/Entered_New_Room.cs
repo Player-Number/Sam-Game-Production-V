@@ -5,6 +5,7 @@ public class Entered_New_Room : MonoBehaviour
 {
     [SerializeField] GameObject Door;
     [SerializeField] GameObject Collectables;
+    [SerializeField] Outline Outline_cs;
 
     void Start()
     {
@@ -22,6 +23,11 @@ public class Entered_New_Room : MonoBehaviour
         {
             other.GetComponent<Player>().Door = Door;
             other.GetComponent<Player>().Collectable_remaining = Collectables.transform.childCount;
+            for (int i = 0; i < Collectables.transform.childCount; i++)
+            {
+                Collectables.transform.GetChild(i).gameObject.GetComponent<Outline>().enabled = true;
+            }
+
             gameObject.SetActive(false);
         }
     }
