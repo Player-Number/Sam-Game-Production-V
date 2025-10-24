@@ -79,14 +79,16 @@ public class Player : MonoBehaviour
         Other_Actions();
         Move_Cap();
 
-        if (move_door)
-        {
-            Door.transform.position += Vector3.up * Time.deltaTime * 2;
-            if (Door.transform.position.y >= 6.5f)
-            {
-                move_door = false;
-            }
-        }
+        //if (move_door)
+        //{
+        //    Door.GetComponent<Door>().enabled = true;
+        //    //Door.transform.position += Vector3.up * Time.deltaTime * 2;
+        //    //Door_opening_sfx.Play();
+        //    //if (Door.transform.position.y >= 6.5f)
+        //    //{
+        //    //    move_door = false;
+        //    //}
+        //}
         //if (transform.position == new Vector3(0,1,0))
         //    Timer = 0;
 
@@ -183,7 +185,8 @@ public class Player : MonoBehaviour
             other.gameObject.SetActive(false);
             Collect_sfx.Play();
             if (Collectable_remaining <= 0)
-                move_door = true;
+                Door.GetComponent<Door>().enabled = true;
+            //move_door = true;
         }
         else if (other.gameObject.tag == "New_Room")
         {

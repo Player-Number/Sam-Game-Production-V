@@ -5,7 +5,6 @@ public class Entered_New_Room : MonoBehaviour
 {
     [SerializeField] GameObject Door;
     [SerializeField] GameObject Collectables;
-    [SerializeField] Outline Outline_cs;
 
     void Start()
     {
