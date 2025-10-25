@@ -9,6 +9,7 @@ public class Player_Look : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void Update()
@@ -21,5 +22,7 @@ public class Player_Look : MonoBehaviour
 
         transform.localRotation = Quaternion.Euler(x_rot, 0, 0);
         player_body.Rotate(Vector3.up * mouse_x);
+
+        transform.position = player_body.position;
     }
 }

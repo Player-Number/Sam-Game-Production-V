@@ -12,10 +12,10 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Collectable
+  - Ground_Layer
   - Water
   - UI
-  - Collectable_See_Through
+  - 
   - 
   - 
   - 

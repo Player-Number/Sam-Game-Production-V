@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject Speedlines;
     [SerializeField] GameObject End_Screen;
     [SerializeField] InputActionAsset input_actions;
+    [SerializeField] Player_Movement Player_Movement;
     
     [SerializeField] AudioSource Collect_sfx;
     [SerializeField] AudioSource Win_sfx;
@@ -29,14 +30,18 @@ public class Player : MonoBehaviour
 
     public float best_time = 0;
     public float Collectable_remaining = 2;
-    float rb_move_speed = 500;
+    //float rb_move_speed = 500;
     float Timer = 0;
-    float horizontal_move_cap = 4;
-    float vertical_move_cap = 5;
-    float dash_force = 150;
-    float jump_force = 500;
-    float dash_cool = 0;
+    //float jump_force = 500;
     float Speedlines_timer = 0;
+
+    public Transform orientation;
+    public float _dash_force = 150;
+    public float dash_force_up = 150;
+    public float dash_duration = 0;
+    float dash_force = 150;
+    float dash_cool = 1;
+    float dash_cool_timer = 0;
 
     bool move_door = false;
     bool is_grounded = true;
@@ -47,13 +52,13 @@ public class Player : MonoBehaviour
     //InputAction move_input;
     //Vector2 dir;
 
-    [Header("FOV Settings")]
-    public float max_speed = 10f; 
-    public float min_FOV = 60f; 
-    public float max_FOV = 90f; 
-    public float FOV_change_speed = 5f; 
-    public float current_FOV_velocity = 60f;
-    public float smooth_time = 0.5f;
+    //[Header("FOV Settings")]
+    //public float max_speed = 10f; 
+    //public float min_FOV = 60f; 
+    //public float max_FOV = 90f; 
+    //public float FOV_change_speed = 5f; 
+    //public float current_FOV_velocity = 60f;
+    //public float smooth_time = 0.5f;
     //public float min_speed = 0f;
 
     void Start()
@@ -75,20 +80,12 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        Move();
+        //Move();
         Other_Actions();
-        Move_Cap();
+        if (Input.GetKeyDown(KeyCode.E)) 
+            Dash();
+        //Move_Cap();
 
-        //if (move_door)
-        //{
-        //    Door.GetComponent<Door>().enabled = true;
-        //    //Door.transform.position += Vector3.up * Time.deltaTime * 2;
-        //    //Door_opening_sfx.Play();
-        //    //if (Door.transform.position.y >= 6.5f)
-        //    //{
-        //    //    move_door = false;
-        //    //}
-        //}
         //if (transform.position == new Vector3(0,1,0))
         //    Timer = 0;
 
@@ -96,25 +93,25 @@ public class Player : MonoBehaviour
         Timer_Text.text = Timer.ToString("F2");
 
         // FOV based on speed
-        float current_speed = rb.linearVelocity.magnitude;
-        float speed_normalized = Mathf.Clamp01(current_speed / max_speed);
-        float target_FOV = Mathf.Lerp(min_FOV, max_FOV, speed_normalized);
+        //float current_speed = rb.linearVelocity.magnitude;
+        //float speed_normalized = Mathf.Clamp01(current_speed / max_speed);
+        //float target_FOV = Mathf.Lerp(min_FOV, max_FOV, speed_normalized);
 
-        Cam.fieldOfView = Mathf.SmoothDamp(Cam.fieldOfView, target_FOV, ref current_FOV_velocity, smooth_time);
+        //Cam.fieldOfView = Mathf.SmoothDamp(Cam.fieldOfView, target_FOV, ref current_FOV_velocity, smooth_time);
 
     }
 
-    private void Move()
-    {
-        if (Input.GetKey(KeyCode.W))
-            rb.AddForce(rb.transform.forward * Time.deltaTime * rb_move_speed);
-        if (Input.GetKey(KeyCode.A))
-            rb.AddForce(-rb.transform.right * Time.deltaTime * rb_move_speed);
-        if (Input.GetKey(KeyCode.S))
-            rb.AddForce(-rb.transform.forward * Time.deltaTime * rb_move_speed);
-        if (Input.GetKey(KeyCode.D))
-            rb.AddForce(rb.transform.right * Time.deltaTime * rb_move_speed);
-    }
+    //private void Move()
+    //{
+    //    if (Input.GetKey(KeyCode.W))
+    //        rb.AddForce(rb.transform.forward * Time.deltaTime * rb_move_speed);
+    //    if (Input.GetKey(KeyCode.A))
+    //        rb.AddForce(-rb.transform.right * Time.deltaTime * rb_move_speed);
+    //    if (Input.GetKey(KeyCode.S))
+    //        rb.AddForce(-rb.transform.forward * Time.deltaTime * rb_move_speed);
+    //    if (Input.GetKey(KeyCode.D))
+    //        rb.AddForce(rb.transform.right * Time.deltaTime * rb_move_speed);
+    //}
 
     private void Other_Actions()
     {
@@ -123,33 +120,36 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha9))
             transform.position = new(0, 2, 200); // dev
 
-        if (Input.GetKeyDown(KeyCode.Mouse1) && dash_cool <= 0)
-        {
-            rb.AddForce(Cam.gameObject.transform.forward * dash_force, ForceMode.Impulse); // dash
-            dash_cool = 3;
-            Speedlines.SetActive(true);
-            Speedlines_timer = 0.5f;
-        }
-        else if (dash_cool > 0)
-        {
-            dash_cool -= Time.deltaTime;
-            Speedlines_timer -= Time.deltaTime;
-            Dash_cool_Text.text = "Dash Cooldown: " + dash_cool.ToString("F0"); // F3
-            if (Speedlines_timer <= 0)
-                Speedlines.SetActive(false);
-        }
+        //if (Input.GetKeyDown(KeyCode.Mouse1) && dash_cool <= 0)
+        //{
+        //    rb.AddForce(Cam.gameObject.transform.forward * dash_force, ForceMode.Impulse); // dash
+        //    dash_cool = 3;
+        //    Speedlines.SetActive(true);
+        //    Speedlines_timer = 0.5f;
+        //}
+        //else if (dash_cool > 0)
+        //{
+        //    dash_cool -= Time.deltaTime;
+        //    Speedlines_timer -= Time.deltaTime;
+        //    Dash_cool_Text.text = "Dash Cooldown: " + dash_cool.ToString("F0"); // F3
+        //    if (Speedlines_timer <= 0)
+        //        Speedlines.SetActive(false);
+        //}
         //else if (dash_cool < 0)
         //    dash_cool = 0;
 
-        if (Input.GetKey(KeyCode.Space) && is_grounded == true) // jump
-        {
-            rb.AddForce(Vector3.up * jump_force);
-            //is_grounded = false;
-        }
-        if (rb.linearVelocity.y == 0)
-            is_grounded = true;
-        else
-            is_grounded = false;
+
+        //if (Input.GetKey(KeyCode.Space) && is_grounded == true) // jump
+        //{
+        //    rb.AddForce(Vector3.up * jump_force);
+        //    //is_grounded = false;
+        //}
+        //if (rb.linearVelocity.y == 0)
+        //    is_grounded = true;
+        //else
+        //    is_grounded = false;
+
+        //is_grounded = Physics.Raycast(transform.position, Vector3.down, 1 * 0.5f + 0.2f);
 
         if (Input.GetKeyDown(KeyCode.P) && disable_pause == false) // pause 
         {
@@ -158,22 +158,36 @@ public class Player : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0;
         }
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-            transform.position = (transform.position + Cam.gameObject.transform.forward * 10); // Dev only
+        if (Input.GetKeyDown(KeyCode.Q))
+            transform.position = (transform.position + Cam.gameObject.transform.forward * 10); // Dev
+        
+        if (dash_cool_timer > 0)
+        {
+            dash_cool_timer -= Time.deltaTime;
+            rb.useGravity = true;
+        }
     }
 
-    private void Move_Cap()
+    void Dash()
     {
-        if (rb.linearVelocity.y >= vertical_move_cap) //rb.maxLinearVelocity
-            rb.linearVelocity = new(rb.linearVelocity.x, vertical_move_cap, rb.linearVelocity.z);
-        if (rb.linearVelocity.x >= horizontal_move_cap)
-            rb.linearVelocity = new(horizontal_move_cap, rb.linearVelocity.y, rb.linearVelocity.z);
-        if (rb.linearVelocity.x <= -horizontal_move_cap)
-            rb.linearVelocity = new(-horizontal_move_cap, rb.linearVelocity.y, rb.linearVelocity.z);
-        if (rb.linearVelocity.z >= horizontal_move_cap)
-            rb.linearVelocity = new(rb.linearVelocity.x, rb.linearVelocity.y, horizontal_move_cap);
-        if (rb.linearVelocity.z <= -horizontal_move_cap)
-            rb.linearVelocity = new(rb.linearVelocity.x, rb.linearVelocity.y, -horizontal_move_cap);
+        if (dash_cool_timer > 0) return;
+        else dash_cool_timer = dash_cool;
+
+        Vector3 force_to_apply = orientation.forward * _dash_force + orientation.up * dash_force_up;
+        Invoke(nameof(Delay_Dash_Force), 0.02f);
+        Invoke(nameof(Reset_Dash), dash_duration);
+        Player_Movement.is_dashing = true;
+        rb.useGravity = false;
+    }
+
+    void Reset_Dash()
+    {
+        Player_Movement.is_dashing = false;
+    }
+    private Vector3 delay_force_to_apply;
+    void Delay_Dash_Force()
+    {
+        rb.AddForce(delay_force_to_apply, ForceMode.Impulse);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -241,17 +255,58 @@ public class Player : MonoBehaviour
         Menu.GetComponent<Menu>().Best_time_Text.text = "Best Time: " + best_time.ToString("F2");
         Menu.GetComponent<Menu>().Main_Menu.gameObject.SetActive(true);
     }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.name == "Speed_Area")
-        {
-            rb_move_speed /= 2;
-        }
-        //if (other.gameObject.name == "Mud")
-        //{
-        //    move_speed *= 6;
-        //}
-    }
+
+
+    //private void Unused()
+    //{
+    //    //if (Input.GetKey(KeyCode.W))
+    //    //{
+    //    //    transform.position = (rb.transform.forward * Time.deltaTime);
+    //    //    transform.position = Vector3.up * Time.deltaTime;
+    //    //}
+
+    //    //if (mud_timer > 0)
+    //    //{
+    //    //    mud_timer -= Time.deltaTime;
+    //    //    is_grounded = false;
+    //    //    //if (mud_timer <= 0)
+    //    //    //{
+    //    //    //    mud_timer = 1;
+    //    //    //    can_jump = true;
+    //    //    //} 
+    //    //}
+
+    //    // Normalize speed to a 0-1 ratio
+    //    //float speed_ratio = Mathf.InverseLerp(min_speed, max_speed, current_speed);
+
+    //    //// Calculate the target FOV based on the speed ratio
+    //    //float target_FOV = Mathf.Lerp(min_FOV, max_FOV, speed_ratio);
+
+    //    //Cam.fieldOfView = Mathf.Lerp(Cam.fieldOfView, target_FOV, Time.deltaTime * FOV_change_speed);
+
+    //    //if (move_door)
+    //    //{
+    //    //    Door.GetComponent<Door>().enabled = true;
+    //    //    //Door.transform.position += Vector3.up * Time.deltaTime * 2;
+    //    //    //Door_opening_sfx.Play();
+    //    //    //if (Door.transform.position.y >= 6.5f)
+    //    //    //{
+    //    //    //    move_door = false;
+    //    //    //}
+    //    //}
+    //}
+
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    //if (other.gameObject.name == "Speed_Area")
+    //    //{
+    //    //    rb_move_speed /= 2;
+    //    //}
+    //    //if (other.gameObject.name == "Mud")
+    //    //{
+    //    //    move_speed *= 6;
+    //    //}
+    //}
 
     //private void OnCollisionEnter(Collision collision)
     //{
@@ -269,32 +324,4 @@ public class Player : MonoBehaviour
     //    transform.position = new Vector3(transform.position.x + move_amount.x, transform.position.y, transform.position.z + move_amount.y);
 
     //}
-
-    private void Unused()
-    {
-        //if (Input.GetKey(KeyCode.W))
-        //{
-        //    transform.position = (rb.transform.forward * Time.deltaTime);
-        //    transform.position = Vector3.up * Time.deltaTime;
-        //}
-
-        //if (mud_timer > 0)
-        //{
-        //    mud_timer -= Time.deltaTime;
-        //    is_grounded = false;
-        //    //if (mud_timer <= 0)
-        //    //{
-        //    //    mud_timer = 1;
-        //    //    can_jump = true;
-        //    //} 
-        //}
-
-        // Normalize speed to a 0-1 ratio
-        //float speed_ratio = Mathf.InverseLerp(min_speed, max_speed, current_speed);
-
-        //// Calculate the target FOV based on the speed ratio
-        //float target_FOV = Mathf.Lerp(min_FOV, max_FOV, speed_ratio);
-
-        //Cam.fieldOfView = Mathf.Lerp(Cam.fieldOfView, target_FOV, Time.deltaTime * FOV_change_speed);
-    }
 }
