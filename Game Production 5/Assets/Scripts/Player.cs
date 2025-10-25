@@ -8,7 +8,6 @@ public class Player : MonoBehaviour
     [SerializeField] TMP_Text Collectable_Text;
     [SerializeField] TMP_Text Timer_Text;
     [SerializeField] TMP_Text Final_Timer_Text;
-    [SerializeField] TMP_Text Dash_cool_Text;
     [SerializeField] TMP_Text Best_time_Text;
     [SerializeField] TMP_Text Best_time_end_Text;
     [SerializeField] Camera Cam;
@@ -36,12 +35,12 @@ public class Player : MonoBehaviour
     float Speedlines_timer = 0;
 
     public Transform orientation;
-    public float _dash_force = 150;
-    public float dash_force_up = 150;
-    public float dash_duration = 0;
-    float dash_force = 150;
-    float dash_cool = 1;
-    float dash_cool_timer = 0;
+    //public float _dash_force = 150;
+    //public float dash_force_up = 150;
+    //public float dash_duration = 0;
+    //float dash_force = 150;
+    //float dash_cool = 1;
+    //float dash_cool_timer = 0;
 
     bool move_door = false;
     bool is_grounded = true;
@@ -66,12 +65,12 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         new_room_trigger_pos = transform.position;
         Collectable_Text.text = "Collectable Remaining: " + (Collectable_remaining);
-        Dash_cool_Text.text = "Dash Cooldown: " + dash_cool.ToString("F0");
+        //Dash_cool_Text.text = "Dash Cooldown: " + dash_cool.ToString("F0");
         Time.timeScale = 1;
         Menu = GameObject.Find("Menu");
+        Menu.GetComponent<Menu>().Main_Menu.gameObject.SetActive(false);
         best_time = Menu.GetComponent<Menu>().Best_time;
         Best_time_Text.text = "Best Time " + Menu.GetComponent<Menu>().Best_time.ToString("F2");
-        Menu.GetComponent<Menu>().Main_Menu.gameObject.SetActive(false);
 
         //move_input = input_actions.FindAction("Move");
         //Cursor.visible = false;
@@ -82,8 +81,6 @@ public class Player : MonoBehaviour
     {
         //Move();
         Other_Actions();
-        if (Input.GetKeyDown(KeyCode.E)) 
-            Dash();
         //Move_Cap();
 
         //if (transform.position == new Vector3(0,1,0))
@@ -159,35 +156,7 @@ public class Player : MonoBehaviour
             Time.timeScale = 0;
         }
         if (Input.GetKeyDown(KeyCode.Q))
-            transform.position = (transform.position + Cam.gameObject.transform.forward * 10); // Dev
-        
-        if (dash_cool_timer > 0)
-        {
-            dash_cool_timer -= Time.deltaTime;
-            rb.useGravity = true;
-        }
-    }
-
-    void Dash()
-    {
-        if (dash_cool_timer > 0) return;
-        else dash_cool_timer = dash_cool;
-
-        Vector3 force_to_apply = orientation.forward * _dash_force + orientation.up * dash_force_up;
-        Invoke(nameof(Delay_Dash_Force), 0.02f);
-        Invoke(nameof(Reset_Dash), dash_duration);
-        Player_Movement.is_dashing = true;
-        rb.useGravity = false;
-    }
-
-    void Reset_Dash()
-    {
-        Player_Movement.is_dashing = false;
-    }
-    private Vector3 delay_force_to_apply;
-    void Delay_Dash_Force()
-    {
-        rb.AddForce(delay_force_to_apply, ForceMode.Impulse);
+            transform.position = (transform.position + Cam.gameObject.transform.forward * 10); // Dev        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -200,7 +169,6 @@ public class Player : MonoBehaviour
             Collect_sfx.Play();
             if (Collectable_remaining <= 0)
                 Door.GetComponent<Door>().enabled = true;
-            //move_door = true;
         }
         else if (other.gameObject.tag == "New_Room")
         {
