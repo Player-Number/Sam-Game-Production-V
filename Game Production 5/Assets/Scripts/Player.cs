@@ -117,6 +117,16 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha9))
             transform.position = new(0, 2, 200); // dev
 
+        if (Input.GetKeyDown(KeyCode.P) && disable_pause == false) // pause 
+        {
+            Pause_Menu.gameObject.SetActive(true);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 0;
+        }
+        if (Input.GetKeyDown(KeyCode.Q))
+            transform.position = (transform.position + Cam.gameObject.transform.forward * 10); // Dev        
+
         //if (Input.GetKeyDown(KeyCode.Mouse1) && dash_cool <= 0)
         //{
         //    rb.AddForce(Cam.gameObject.transform.forward * dash_force, ForceMode.Impulse); // dash
@@ -147,16 +157,6 @@ public class Player : MonoBehaviour
         //    is_grounded = false;
 
         //is_grounded = Physics.Raycast(transform.position, Vector3.down, 1 * 0.5f + 0.2f);
-
-        if (Input.GetKeyDown(KeyCode.P) && disable_pause == false) // pause 
-        {
-            Pause_Menu.gameObject.SetActive(true);
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-            Time.timeScale = 0;
-        }
-        if (Input.GetKeyDown(KeyCode.Q))
-            transform.position = (transform.position + Cam.gameObject.transform.forward * 10); // Dev        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -223,7 +223,6 @@ public class Player : MonoBehaviour
         Menu.GetComponent<Menu>().Best_time_Text.text = "Best Time: " + best_time.ToString("F2");
         Menu.GetComponent<Menu>().Main_Menu.gameObject.SetActive(true);
     }
-
 
     //private void Unused()
     //{

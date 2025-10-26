@@ -338,6 +338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Door
   Door_opening_sfx: {fileID: -6193350012472837792}
+  open_speed: 2
 --- !u!82 &-6193350012472837792
 AudioSource:
   m_ObjectHideFlags: 0
@@ -351,7 +352,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: f149772867d3f974f8f9a33138023c34, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0

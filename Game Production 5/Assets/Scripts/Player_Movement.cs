@@ -1,10 +1,13 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player_Movement : MonoBehaviour
 {
     [SerializeField] Camera Cam;
-    [SerializeField] TMP_Text Dash_cool_Text;
+    [SerializeField] Slider Slider;
+    [SerializeField] GameObject Slider_fill;
+    //[SerializeField] TMP_Text Dash_cool_Text;
 
     Rigidbody rb;
 
@@ -27,7 +30,7 @@ public class Player_Movement : MonoBehaviour
     [Header("Dashing")]
     public float dash_force;
     public float dash_force_up;
-    float dash_cool = 1;
+    public float dash_cool;
     float dash_cool_timer = 2;
     public float dash_duration = 0.2f;
     public float Max_Y_speed;
@@ -57,6 +60,7 @@ public class Player_Movement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         og_move_speed = move_speed;
+        Slider.maxValue = dash_cool;
     }
 
     void Update()
@@ -83,16 +87,18 @@ public class Player_Movement : MonoBehaviour
         if (dash_cool_timer > 0)
         {
             dash_cool_timer -= Time.deltaTime;
-            Dash_cool_Text.text = "Dash Cooldown: " + dash_cool_timer.ToString("F0");
+            Slider.value = dash_cool_timer;
+            Slider_fill.SetActive(true);
+            //Dash_cool_Text.text = "Dash Cooldown: " + dash_cool_timer.ToString("F0");
         }
+        else
+            Slider_fill.SetActive(false);
     }
 
     private void FixedUpdate()
     {
         Move();
-        if (rb.linearVelocity.y == 0)
-            is_grounded = true;
-        if (!is_grounded)
+        //if (!is_grounded)
             is_grounded = Physics.Raycast(transform.position, Vector3.down, player_height * 0.5f + 0.15f, ground_layer);
     }
 
@@ -108,8 +114,8 @@ public class Player_Movement : MonoBehaviour
             state = Movement_State.Dashing;
             move_speed = dash_speed;
         }
-        //else
-        //    move_speed = og_move_speed;
+        else
+            move_speed = og_move_speed;
         //else
         //{
         //    state = Movement_State.Airborne;
@@ -124,6 +130,7 @@ public class Player_Movement : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) && is_grounded)
         {
             Jump();
+            //is_grounded = false;
         }
     }
 
@@ -228,20 +235,32 @@ public class Player_Movement : MonoBehaviour
         //    rb.linearVelocity = new(rb.linearVelocity.x, rb.linearVelocity.y, -horizontal_move_cap);
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.layer == 3)
-        {
-            is_grounded = true;
-            //state = Movement_State.Running;
-        }
-    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.layer == 3)
+    //        is_grounded = true;
+    //}
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.layer == 3)
-        {
-            is_grounded = false;
-        }
-    }
+    //private void OnCollisionExit(Collision collision)
+    //{
+    //    if (collision.gameObject.layer == 3)
+    //        is_grounded = false;
+    //}
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.layer == 3)
+    //    {
+    //        is_grounded = true;
+    //        //state = Movement_State.Running;
+    //    }
+    //}
+
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.gameObject.layer == 3)
+    //    {
+    //        is_grounded = false;
+    //    }
+    //}
 }
