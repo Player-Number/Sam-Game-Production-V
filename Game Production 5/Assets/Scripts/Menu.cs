@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
-    [SerializeField] AudioSource button_pressed;
+    //[SerializeField] AudioSource button_pressed;
     public TMP_Text Best_time_Text;
     public Canvas Main_Menu;
     public float Best_time = 0;
@@ -31,15 +31,15 @@ public class Menu : MonoBehaviour
 
     //}
 
-    public void To_Game()
-    {
-        SceneManager.LoadScene("Game_Scene");
-        button_pressed.Play();
-    }
+    //public void To_Game()
+    //{
+    //    button_pressed.Play();
+    //    SceneManager.LoadScene("Game_Scene");
+    //}
 
-    public void Quit()
-    {
-        button_pressed.Play();
-        Application.Quit();
-    }
+    //public void Quit()
+    //{
+    //    button_pressed.Play();
+    //    Application.Quit();
+    //}
 }

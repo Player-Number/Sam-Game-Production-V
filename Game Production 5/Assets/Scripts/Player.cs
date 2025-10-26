@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     [SerializeField] AudioSource Collect_sfx;
     [SerializeField] AudioSource Win_sfx;
     [SerializeField] AudioSource Gameplay_ost;
+    [SerializeField] AudioSource button_pressed;
 
     public GameObject Door;
 
@@ -42,8 +43,8 @@ public class Player : MonoBehaviour
     //float dash_cool = 1;
     //float dash_cool_timer = 0;
 
-    bool move_door = false;
-    bool is_grounded = true;
+    //bool move_door = false;
+    //bool is_grounded = true;
     bool disable_pause = false;
 
     Vector3 new_room_trigger_pos;
@@ -68,7 +69,7 @@ public class Player : MonoBehaviour
         //Dash_cool_Text.text = "Dash Cooldown: " + dash_cool.ToString("F0");
         Time.timeScale = 1;
         Menu = GameObject.Find("Menu");
-        Menu.GetComponent<Menu>().Main_Menu.gameObject.SetActive(false);
+        //Menu.GetComponent<Menu>().Main_Menu.gameObject.SetActive(false);
         best_time = Menu.GetComponent<Menu>().Best_time;
         Best_time_Text.text = "Best Time " + Menu.GetComponent<Menu>().Best_time.ToString("F2");
 
@@ -115,7 +116,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha0))
             transform.position = new_room_trigger_pos;
         if (Input.GetKeyDown(KeyCode.Alpha9))
-            transform.position = new(0, 2, 200); // dev
+            transform.position = new(0, 2, 210); // dev
 
         if (Input.GetKeyDown(KeyCode.P) && disable_pause == false) // pause 
         {
@@ -175,7 +176,7 @@ public class Player : MonoBehaviour
             new_room_trigger_pos = other.transform.position;
             Collectable_Text.text = "Collectable Remaining: " + (Collectable_remaining);
             other.gameObject.SetActive(false);
-            move_door = false;
+            //move_door = false;
         }
         else if (other.gameObject.tag == "Death")
         {
@@ -214,14 +215,16 @@ public class Player : MonoBehaviour
         Pause_Menu.SetActive(false);
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        button_pressed.Play();
     }
 
     public void To_Main_Menu()
     {
-        SceneManager.LoadScene("Main_Menu");
-        Best_time_Text.gameObject.SetActive(true);
+        Menu.GetComponent<Menu>().Best_time_Text.gameObject.SetActive(true);
         Menu.GetComponent<Menu>().Best_time_Text.text = "Best Time: " + best_time.ToString("F2");
-        Menu.GetComponent<Menu>().Main_Menu.gameObject.SetActive(true);
+        //Menu.GetComponent<Menu>().Main_Menu.gameObject.SetActive(true);
+        button_pressed.Play();
+        SceneManager.LoadScene("Main_Menu");
     }
 
     //private void Unused()

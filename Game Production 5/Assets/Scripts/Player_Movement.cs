@@ -19,13 +19,17 @@ public class Player_Movement : MonoBehaviour
     public float dash_speed;
     float horizontal_input;
     float vertical_input;
-    public float jump_force;
 
     Vector3 move_dir;
 
-    public bool is_dashing = false;
+    bool is_dashing = false;
 
     public Movement_State state;
+
+    [Header("Jumping")]
+    public float jump_force;
+    public float jump_cool;
+    bool ready_to_jump = true;
 
     [Header("Dashing")]
     public float dash_force;
@@ -127,10 +131,11 @@ public class Player_Movement : MonoBehaviour
         horizontal_input = Input.GetAxisRaw("Horizontal");
         vertical_input = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetKey(KeyCode.Space) && is_grounded)
+        if (Input.GetKey(KeyCode.Space) && is_grounded && ready_to_jump)
         {
             Jump();
-            //is_grounded = false;
+            ready_to_jump = false;
+            Invoke(nameof(Reset_Jump), jump_cool);
         }
     }
 
@@ -157,6 +162,12 @@ public class Player_Movement : MonoBehaviour
     {
         rb.linearVelocity = new(rb.linearVelocity.x, 0, rb.linearVelocity.z);
         rb.AddForce(Vector3.up * jump_force, ForceMode.Impulse);
+        ready_to_jump = false;
+    }
+
+    void Reset_Jump()
+    {
+        ready_to_jump = true;
     }
 
     void Dash()
