@@ -10664,7 +10664,6 @@ MonoBehaviour:
   Door: {fileID: 2967408575307519631}
   best_time: 0
   Collectable_remaining: 2
-  orientation: {fileID: 330585546}
 --- !u!135 &527534397
 SphereCollider:
   m_ObjectHideFlags: 0

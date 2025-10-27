@@ -7,7 +7,6 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] Camera Cam;
     [SerializeField] Slider Slider;
     [SerializeField] GameObject Slider_fill;
-    //[SerializeField] TMP_Text Dash_cool_Text;
 
     Rigidbody rb;
 
@@ -93,7 +92,6 @@ public class Player_Movement : MonoBehaviour
             dash_cool_timer -= Time.deltaTime;
             Slider.value = dash_cool_timer;
             Slider_fill.SetActive(true);
-            //Dash_cool_Text.text = "Dash Cooldown: " + dash_cool_timer.ToString("F0");
         }
         else
             Slider_fill.SetActive(false);
@@ -102,8 +100,7 @@ public class Player_Movement : MonoBehaviour
     private void FixedUpdate()
     {
         Move();
-        //if (!is_grounded)
-            is_grounded = Physics.Raycast(transform.position, Vector3.down, player_height * 0.5f + 0.15f, ground_layer);
+        is_grounded = Physics.Raycast(transform.position, Vector3.down, player_height * 0.5f + 0.15f, ground_layer);
     }
 
     void State_Handler()

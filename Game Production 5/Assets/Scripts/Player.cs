@@ -24,54 +24,28 @@ public class Player : MonoBehaviour
 
     public GameObject Door;
 
-    GameObject Menu;
+    GameObject Game_Controller;
 
     Rigidbody rb;
 
     public float best_time = 0;
     public float Collectable_remaining = 2;
-    //float rb_move_speed = 500;
     float Timer = 0;
-    //float jump_force = 500;
     float Speedlines_timer = 0;
 
-    public Transform orientation;
-    //public float _dash_force = 150;
-    //public float dash_force_up = 150;
-    //public float dash_duration = 0;
-    //float dash_force = 150;
-    //float dash_cool = 1;
-    //float dash_cool_timer = 0;
-
-    //bool move_door = false;
-    //bool is_grounded = true;
     bool disable_pause = false;
 
     Vector3 new_room_trigger_pos;
-
-    //InputAction move_input;
-    //Vector2 dir;
-
-    //[Header("FOV Settings")]
-    //public float max_speed = 10f; 
-    //public float min_FOV = 60f; 
-    //public float max_FOV = 90f; 
-    //public float FOV_change_speed = 5f; 
-    //public float current_FOV_velocity = 60f;
-    //public float smooth_time = 0.5f;
-    //public float min_speed = 0f;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         new_room_trigger_pos = transform.position;
         Collectable_Text.text = "Collectable Remaining: " + (Collectable_remaining);
-        //Dash_cool_Text.text = "Dash Cooldown: " + dash_cool.ToString("F0");
         Time.timeScale = 1;
-        Menu = GameObject.Find("Menu");
-        //Menu.GetComponent<Menu>().Main_Menu.gameObject.SetActive(false);
-        best_time = Menu.GetComponent<Menu>().Best_time;
-        Best_time_Text.text = "Best Time " + Menu.GetComponent<Menu>().Best_time.ToString("F2");
+        Game_Controller = GameObject.Find("Game_Controller");
+        best_time = Game_Controller.GetComponent<Game_Controller>().Best_time;
+        Best_time_Text.text = "Best Time " + Game_Controller.GetComponent<Game_Controller>().Best_time.ToString("F2");
 
         //move_input = input_actions.FindAction("Move");
         //Cursor.visible = false;
@@ -80,9 +54,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        //Move();
         Other_Actions();
-        //Move_Cap();
 
         //if (transform.position == new Vector3(0,1,0))
         //    Timer = 0;
@@ -202,10 +174,10 @@ public class Player : MonoBehaviour
             {
                 best_time = Timer;
                 Best_time_end_Text.text = "Best Time: " + best_time.ToString("F2");
-                Menu.GetComponent<Menu>().Best_time = best_time;
+                Game_Controller.GetComponent<Game_Controller>().Best_time = best_time;
             }
             else
-                Best_time_end_Text.text = "Best Time: " + Menu.GetComponent<Menu>().Best_time.ToString("F2");
+                Best_time_end_Text.text = "Best Time: " + Game_Controller.GetComponent<Game_Controller>().Best_time.ToString("F2");
         }
     }
 
@@ -220,9 +192,8 @@ public class Player : MonoBehaviour
 
     public void To_Main_Menu()
     {
-        Menu.GetComponent<Menu>().Best_time_Text.gameObject.SetActive(true);
-        Menu.GetComponent<Menu>().Best_time_Text.text = "Best Time: " + best_time.ToString("F2");
-        //Menu.GetComponent<Menu>().Main_Menu.gameObject.SetActive(true);
+        Game_Controller.GetComponent<Game_Controller>().Best_time_Text.gameObject.SetActive(true);
+        Game_Controller.GetComponent<Game_Controller>().Best_time_Text.text = "Best Time: " + best_time.ToString("F2");
         button_pressed.Play();
         SceneManager.LoadScene("Main_Menu");
     }

@@ -3,14 +3,14 @@ using Unity.Hierarchy;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Menu : MonoBehaviour
+public class Game_Controller : MonoBehaviour
 {
     //[SerializeField] AudioSource button_pressed;
     public TMP_Text Best_time_Text;
     public Canvas Main_Menu;
     public float Best_time = 0;
 
-    public static Menu Instance { get; private set; }
+    public static Game_Controller Instance { get; private set; }
 
     void Start()
     {

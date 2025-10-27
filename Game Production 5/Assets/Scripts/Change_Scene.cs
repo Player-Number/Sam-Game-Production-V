@@ -4,14 +4,14 @@ using UnityEngine.SceneManagement;
 public class Change_Scene : MonoBehaviour
 {
     [SerializeField] AudioSource button_pressed;
-    Menu Menu;
+    Game_Controller Game_Controller;
     string scene_name;
     float delay_load_timer = 0.25f;
     bool to_delay_load = false;
 
     void Start()
     {
-        Menu = GameObject.Find("Menu").gameObject.GetComponent<Menu>();
+        Game_Controller = GameObject.Find("Game_Controller").gameObject.GetComponent<Game_Controller>();
     }
 
     void Update()
@@ -38,10 +38,10 @@ public class Change_Scene : MonoBehaviour
         SceneManager.LoadScene(name);
         if (name != "Main_Menu")
         {
-            Menu.Best_time_Text.gameObject.SetActive(false);
+            Game_Controller.Best_time_Text.gameObject.SetActive(false);
         }
         else
-            Menu.Best_time_Text.gameObject.SetActive(true);
+            Game_Controller.Best_time_Text.gameObject.SetActive(true);
         //to_delay_load = true;
     }
 
