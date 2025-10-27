@@ -90,15 +90,16 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha9))
             transform.position = new(0, 2, 210); // dev
 
-        if (Input.GetKeyDown(KeyCode.P) && disable_pause == false) // pause 
-        {
-            Pause_Menu.gameObject.SetActive(true);
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-            Time.timeScale = 0;
-        }
         if (Input.GetKeyDown(KeyCode.Q))
             transform.position = (transform.position + Cam.gameObject.transform.forward * 10); // Dev        
+
+        //if (Input.GetKeyDown(KeyCode.P) && disable_pause == false) // pause 
+        //{
+        //    Pause_Menu.gameObject.SetActive(true);
+        //    Cursor.visible = true;
+        //    Cursor.lockState = CursorLockMode.None;
+        //    Time.timeScale = 0;
+        //}
 
         //if (Input.GetKeyDown(KeyCode.Mouse1) && dash_cool <= 0)
         //{
@@ -181,22 +182,22 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void Resume()
-    {
-        Time.timeScale = 1.0f;
-        Pause_Menu.SetActive(false);
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        button_pressed.Play();
-    }
+    //public void Resume()
+    //{
+    //    Time.timeScale = 1.0f;
+    //    Pause_Menu.SetActive(false);
+    //    Cursor.visible = false;
+    //    Cursor.lockState = CursorLockMode.Locked;
+    //    button_pressed.Play();
+    //}
 
-    public void To_Main_Menu()
-    {
-        Game_Controller.GetComponent<Game_Controller>().Best_time_Text.gameObject.SetActive(true);
-        Game_Controller.GetComponent<Game_Controller>().Best_time_Text.text = "Best Time: " + best_time.ToString("F2");
-        button_pressed.Play();
-        SceneManager.LoadScene("Main_Menu");
-    }
+    //public void To_Main_Menu()
+    //{
+    //    Game_Controller.GetComponent<Game_Controller>().Best_time_Text.gameObject.SetActive(true);
+    //    Game_Controller.GetComponent<Game_Controller>().Best_time_Text.text = "Best Time: " + best_time.ToString("F2");
+    //    button_pressed.Play();
+    //    SceneManager.LoadScene("Main_Menu");
+    //}
 
     //private void Unused()
     //{
