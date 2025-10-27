@@ -1371,6 +1371,7 @@ GameObject:
   m_Component:
   - component: {fileID: 595653865}
   - component: {fileID: 595653866}
+  - component: {fileID: 595653867}
   m_Layer: 5
   m_Name: Slider_Sensitivity
   m_TagString: Untagged
@@ -1446,13 +1447,37 @@ MonoBehaviour:
   m_FillRect: {fileID: 112829023}
   m_HandleRect: {fileID: 46442469}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
+  m_MinValue: 10
+  m_MaxValue: 750
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 200
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 595653867}
+        m_TargetAssemblyTypeName: Update_Setting_Num, Assembly-CSharp
+        m_MethodName: Update_Setting_Number
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2078187956}
+          m_ObjectArgumentAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &595653867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595653864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98c8e3e3f093a8944a26d6e6c4c4db88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Update_Setting_Num
 --- !u!1 &617830045
 GameObject:
   m_ObjectHideFlags: 0
@@ -2632,6 +2657,7 @@ GameObject:
   m_Component:
   - component: {fileID: 999583195}
   - component: {fileID: 999583196}
+  - component: {fileID: 999583197}
   m_Layer: 5
   m_Name: Slider_Audio
   m_TagString: Untagged
@@ -2708,12 +2734,36 @@ MonoBehaviour:
   m_HandleRect: {fileID: 741734457}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 100
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 999583197}
+        m_TargetAssemblyTypeName: Update_Setting_Num, Assembly-CSharp
+        m_MethodName: Update_Setting_Number
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1759512982}
+          m_ObjectArgumentAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &999583197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999583194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98c8e3e3f093a8944a26d6e6c4c4db88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Update_Setting_Num
 --- !u!1 &1024152279
 GameObject:
   m_ObjectHideFlags: 0
@@ -4778,6 +4828,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1880048818}
   - component: {fileID: 1880048819}
+  - component: {fileID: 1880048820}
   m_Layer: 5
   m_Name: Slider_FOV
   m_TagString: Untagged
@@ -4853,13 +4904,37 @@ MonoBehaviour:
   m_FillRect: {fileID: 378775860}
   m_HandleRect: {fileID: 563507492}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
+  m_MinValue: 30
+  m_MaxValue: 120
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 60
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1880048820}
+        m_TargetAssemblyTypeName: Update_Setting_Num, Assembly-CSharp
+        m_MethodName: Update_Setting_Number
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1880048820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1880048817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98c8e3e3f093a8944a26d6e6c4c4db88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Update_Setting_Num
 --- !u!1 &1949315674
 GameObject:
   m_ObjectHideFlags: 0
@@ -5432,6 +5507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Menu
   button_pressed: {fileID: 2070214124}
+  Sensitivity_Slider: {fileID: 595653866}
   Setting_Menu: {fileID: 535037248}
   Close_button: {fileID: 887669854}
   Resume_button: {fileID: 1829272666}
@@ -5743,7 +5819,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0
+  m_text: 200
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

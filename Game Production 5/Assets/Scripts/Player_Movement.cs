@@ -45,7 +45,7 @@ public class Player_Movement : MonoBehaviour
     bool is_grounded;
 
     [Header("FOV Settings")]
-    public float max_speed = 10f;
+    public float max_speed_FOV = 10f;
     public float min_FOV = 60f;
     public float max_FOV = 90f;
     public float FOV_change_speed = 5f;
@@ -212,7 +212,7 @@ public class Player_Movement : MonoBehaviour
     void FOV_based_on_Speed()
     {
         float current_speed = rb.linearVelocity.magnitude;
-        float speed_normalized = Mathf.Clamp01(current_speed / max_speed);
+        float speed_normalized = Mathf.Clamp01(current_speed / max_speed_FOV);
         float target_FOV = Mathf.Lerp(min_FOV, max_FOV, speed_normalized);
 
         Cam.fieldOfView = Mathf.SmoothDamp(Cam.fieldOfView, target_FOV, ref current_FOV_velocity, smooth_time);

@@ -2,10 +2,13 @@ using TMPro;
 using Unity.Hierarchy;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Game_Controller : MonoBehaviour
 {
     [SerializeField] AudioSource button_pressed;
+    //[SerializeField] TMP_Text Sensitivity_num;
+    public Slider Sensitivity_Slider;
     public GameObject Setting_Menu;
     public GameObject Close_button;
     public GameObject Resume_button;
@@ -66,6 +69,17 @@ public class Game_Controller : MonoBehaviour
         Setting_Menu.SetActive(false);
         button_pressed.Play();
     }
+
+    //public void On_Val_Changed(TMP_Text Val_Text, Slider Slider)
+    //{
+    //    Val_Text.text = Slider.value.ToString();
+    //}
+
+    //public void Update_Setting_Num(TMP_Text Val_Text)
+    //{
+    //    Val_Text.text = GetComponent<Slider>().value.ToString("F0");
+    //}
+
 
     //public void To_Game()
     //{
