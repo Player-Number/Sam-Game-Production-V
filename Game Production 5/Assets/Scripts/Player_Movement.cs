@@ -5,10 +5,11 @@ using UnityEngine.UI;
 public class Player_Movement : MonoBehaviour
 {
     [SerializeField] Camera Cam;
-    [SerializeField] Slider Slider;
-    [SerializeField] GameObject Slider_fill;
+    [SerializeField] Slider Dash_cool_bar;
+    [SerializeField] GameObject Dash_cool_bar_fill;
 
     Rigidbody rb;
+    GameObject Game_Controller;
 
     public Transform Orientation;
 
@@ -46,8 +47,8 @@ public class Player_Movement : MonoBehaviour
 
     [Header("FOV Settings")]
     public float max_speed_FOV = 10f;
-    public float min_FOV = 60f;
-    public float max_FOV = 90f;
+    public float min_FOV = 60f; // 60 \ defualt
+    public float max_FOV = 90f; // 90
     public float FOV_change_speed = 5f;
     public float current_FOV_velocity = 60f;
     public float smooth_time = 0.5f;
@@ -62,8 +63,9 @@ public class Player_Movement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        Game_Controller = GameObject.Find("Game_Controller");
         og_move_speed = move_speed;
-        Slider.maxValue = dash_cool;
+        Dash_cool_bar.maxValue = dash_cool;
     }
 
     void Update()
@@ -78,6 +80,9 @@ public class Player_Movement : MonoBehaviour
         //if (Input.GetKeyDown(KeyCode.Mouse1))
         //    rb.AddForce(Cam.gameObject.transform.forward * dash_force, ForceMode.Impulse);
 
+        min_FOV = Game_Controller.GetComponent<Game_Controller>().FOV_Slider.value;
+        max_FOV = Game_Controller.GetComponent<Game_Controller>().FOV_Slider.value + 30;
+
         if (is_grounded)
             rb.linearDamping = grounded_drag;
         else
@@ -90,11 +95,11 @@ public class Player_Movement : MonoBehaviour
         if (dash_cool_timer > 0)
         {
             dash_cool_timer -= Time.deltaTime;
-            Slider.value = dash_cool_timer;
-            Slider_fill.SetActive(true);
+            Dash_cool_bar.value = dash_cool_timer;
+            Dash_cool_bar_fill.SetActive(true);
         }
         else
-            Slider_fill.SetActive(false);
+            Dash_cool_bar_fill.SetActive(false);
     }
 
     private void FixedUpdate()

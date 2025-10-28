@@ -3387,7 +3387,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0
+  m_text: 30
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4916,7 +4916,7 @@ MonoBehaviour:
         m_MethodName: Update_Setting_Number
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgument: {fileID: 1308619183}
           m_ObjectArgumentAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -5508,6 +5508,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Menu
   button_pressed: {fileID: 2070214124}
   Sensitivity_Slider: {fileID: 595653866}
+  FOV_Slider: {fileID: 1880048819}
   Setting_Menu: {fileID: 535037248}
   Close_button: {fileID: 887669854}
   Resume_button: {fileID: 1829272666}

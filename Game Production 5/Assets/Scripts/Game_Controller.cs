@@ -9,6 +9,7 @@ public class Game_Controller : MonoBehaviour
     [SerializeField] AudioSource button_pressed;
     //[SerializeField] TMP_Text Sensitivity_num;
     public Slider Sensitivity_Slider;
+    public Slider FOV_Slider;
     public GameObject Setting_Menu;
     public GameObject Close_button;
     public GameObject Resume_button;
