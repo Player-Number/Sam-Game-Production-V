@@ -13,18 +13,17 @@ public class Player_Movement : MonoBehaviour
 
     public Transform Orientation;
 
+    public Movement_State state;
+
+    Vector3 move_dir;
+    float horizontal_input;
+    float vertical_input;
+
+    [Header("Speed")]
     public float move_speed;
     float og_move_speed;
     public float air_speed;
     public float dash_speed;
-    float horizontal_input;
-    float vertical_input;
-
-    Vector3 move_dir;
-
-    bool is_dashing = false;
-
-    public Movement_State state;
 
     [Header("Jumping")]
     public float jump_force;
@@ -36,6 +35,7 @@ public class Player_Movement : MonoBehaviour
     public float dash_force_up;
     public float dash_cool;
     float dash_cool_timer = 2;
+    bool is_dashing = false;
     public float dash_duration = 0.2f;
     public float Max_Y_speed;
 

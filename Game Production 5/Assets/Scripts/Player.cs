@@ -1,39 +1,38 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
+//using Unity.VisualScripting;
+//using UnityEngine.InputSystem;
+//using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] TMP_Text Collectable_Text;
-    [SerializeField] TMP_Text Timer_Text;
-    [SerializeField] TMP_Text Final_Timer_Text;
-    [SerializeField] TMP_Text Best_time_Text;
-    [SerializeField] TMP_Text Best_time_end_Text;
     [SerializeField] Camera Cam;
     [SerializeField] GameObject Pause_Menu;
     [SerializeField] GameObject Speedlines;
     [SerializeField] GameObject End_Screen;
-    [SerializeField] InputActionAsset input_actions;
     [SerializeField] Player_Movement Player_Movement;
-    
-    [SerializeField] AudioSource Collect_sfx;
-    [SerializeField] AudioSource Win_sfx;
-    [SerializeField] AudioSource Gameplay_ost;
-    [SerializeField] AudioSource button_pressed;
+    //[SerializeField] InputActionAsset input_actions;
 
+    [Header("Text")]
+    [SerializeField] TMP_Text Collectable_Text;
+    [SerializeField] TMP_Text Timer_Text;
+    [SerializeField] TMP_Text Final_Time_Text;
+    [SerializeField] TMP_Text Best_time_Text;
+    [SerializeField] TMP_Text Best_time_end_Text;
+    
     public GameObject Door;
 
-    GameObject Game_Controller;
+    Game_Controller Game_Controller;
+    Audio_Manager Audio_Manager;
 
     Rigidbody rb;
 
-    public float best_time = 0;
+    //public float best_time = 0;
     public float Collectable_remaining = 2;
     float Timer = 0;
     float Speedlines_timer = 0;
 
-    bool disable_pause = false;
+    //bool disable_pause = false;
 
     Vector3 new_room_trigger_pos;
 
@@ -43,10 +42,14 @@ public class Player : MonoBehaviour
         new_room_trigger_pos = transform.position;
         Collectable_Text.text = "Collectable Remaining: " + (Collectable_remaining);
         Time.timeScale = 1;
-        Game_Controller = GameObject.Find("Game_Controller");
-        best_time = Game_Controller.GetComponent<Game_Controller>().Best_time;
-        Best_time_Text.text = "Best Time " + Game_Controller.GetComponent<Game_Controller>().Best_time.ToString("F2");
-
+        Game_Controller = GameObject.Find("Game_Controller").GetComponent<Game_Controller>();
+        Audio_Manager = GameObject.Find("Audio_Manager").gameObject.GetComponent<Audio_Manager>();
+        //Game_Controller.Best_time = Game_Controller.GetComponent<Game_Controller>().Best_time;
+        if (Game_Controller.Best_time != 0)
+            Best_time_Text.text = "Best Time: " + Game_Controller.Best_time.ToString("F2");
+        else
+            Best_time_Text.text = "Best Time: N/A";
+        Game_Controller.disable_pause = false;
         //move_input = input_actions.FindAction("Move");
         //Cursor.visible = false;
         //Cursor.lockState = CursorLockMode.Locked;
@@ -140,7 +143,7 @@ public class Player : MonoBehaviour
             Collectable_remaining -= 1;
             Collectable_Text.text = "Collectable Remaining: " + (Collectable_remaining);
             other.gameObject.SetActive(false);
-            Collect_sfx.Play();
+            Audio_Manager.Play_SFX(Audio_Manager.Collecting);
             if (Collectable_remaining <= 0)
                 Door.GetComponent<Door>().enabled = true;
         }
@@ -163,41 +166,24 @@ public class Player : MonoBehaviour
         else if (other.gameObject.name == "Win_Trigger")
         {
             End_Screen.SetActive(true);
-            Final_Timer_Text.text = "Final Timer: " + Timer.ToString("F2");
+            Final_Time_Text.text = "Final Time: " + Timer.ToString("F2");
             other.gameObject.SetActive(false);
-            disable_pause = true;
+            Game_Controller.disable_pause = true;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
-            Win_sfx.Play();
-            Gameplay_ost.Stop();
+            //Audio_Manager.Play_SFX(Audio_Manager.Win);
+            Audio_Manager.Play_Music(Audio_Manager.Win_OST);
             Time.timeScale = 0;
-            if (Timer > best_time)
+            if (Timer < Game_Controller.Best_time || Game_Controller.Best_time == 0)
             {
-                best_time = Timer;
-                Best_time_end_Text.text = "Best Time: " + best_time.ToString("F2");
-                Game_Controller.GetComponent<Game_Controller>().Best_time = best_time;
+                Game_Controller.Best_time = Timer;
+                Best_time_end_Text.text = "Best Time: " + Game_Controller.Best_time.ToString("F2");
+                Game_Controller.Best_time_Text.text = "Best Time: " + Game_Controller.Best_time.ToString("F2");
             }
             else
-                Best_time_end_Text.text = "Best Time: " + Game_Controller.GetComponent<Game_Controller>().Best_time.ToString("F2");
+                Best_time_end_Text.text = "Best Time: " + Game_Controller.Best_time.ToString("F2");
         }
     }
-
-    //public void Resume()
-    //{
-    //    Time.timeScale = 1.0f;
-    //    Pause_Menu.SetActive(false);
-    //    Cursor.visible = false;
-    //    Cursor.lockState = CursorLockMode.Locked;
-    //    button_pressed.Play();
-    //}
-
-    //public void To_Main_Menu()
-    //{
-    //    Game_Controller.GetComponent<Game_Controller>().Best_time_Text.gameObject.SetActive(true);
-    //    Game_Controller.GetComponent<Game_Controller>().Best_time_Text.text = "Best Time: " + best_time.ToString("F2");
-    //    button_pressed.Play();
-    //    SceneManager.LoadScene("Main_Menu");
-    //}
 
     //private void Unused()
     //{

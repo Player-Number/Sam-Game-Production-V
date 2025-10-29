@@ -6,7 +6,9 @@ using UnityEngine.UI;
 
 public class Game_Controller : MonoBehaviour
 {
-    [SerializeField] AudioSource button_pressed;
+    [SerializeField] Audio_Manager Audio_Manager;
+    Change_Scene Change_Scene;
+
     //[SerializeField] TMP_Text Sensitivity_num;
     public Slider Sensitivity_Slider;
     public Slider FOV_Slider;
@@ -16,9 +18,8 @@ public class Game_Controller : MonoBehaviour
     public GameObject To_Main_Menu_button;
     public TMP_Text Best_time_Text;
     public Canvas Main_Menu;
-    public float Best_time = 0;
+    public float Best_time = 0; // int.MaxValue
     public bool disable_pause = true;
-
 
     public static Game_Controller Instance { get; private set; }
 
@@ -53,22 +54,23 @@ public class Game_Controller : MonoBehaviour
         Setting_Menu.SetActive(false);
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        button_pressed.Play();
+        Audio_Manager.Play_SFX(Audio_Manager.Button_Pressed);
     }
 
     public void To_Main_Menu()
     {
         //Game_Controller.GetComponent<Game_Controller>().Best_time_Text.gameObject.SetActive(true);
         //Game_Controller.GetComponent<Game_Controller>().Best_time_Text.text = "Best Time: " + best_time.ToString("F2");
-        button_pressed.Play();
+        Audio_Manager.Play_SFX(Audio_Manager.Button_Pressed);
         Setting_Menu.SetActive(false);
-        SceneManager.LoadScene("Main_Menu");
+        Change_Scene = GameObject.Find("Change_Scene").GetComponent<Change_Scene>();
+        Change_Scene.Scene_To_Load("Main_Menu");
     }
 
     public void Close_Settings()
     {
         Setting_Menu.SetActive(false);
-        button_pressed.Play();
+        Audio_Manager.Play_SFX(Audio_Manager.Button_Pressed);
     }
 
     //public void On_Val_Changed(TMP_Text Val_Text, Slider Slider)

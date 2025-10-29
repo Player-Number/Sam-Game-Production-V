@@ -9942,7 +9942,7 @@ GameObject:
   - component: {fileID: 481433358}
   - component: {fileID: 481433357}
   m_Layer: 5
-  m_Name: Final Time
+  m_Name: Final Time Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10910,21 +10910,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4e227842dde57a469110531d06084f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  Collectable_Text: {fileID: 2106742965}
-  Timer_Text: {fileID: 611893231}
-  Final_Timer_Text: {fileID: 481433357}
-  Best_time_Text: {fileID: 1041842141}
-  Best_time_end_Text: {fileID: 679544682}
   Cam: {fileID: 330585545}
   Pause_Menu: {fileID: 1761667643}
   Speedlines: {fileID: 625016834}
   End_Screen: {fileID: 709872878}
-  input_actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   Player_Movement: {fileID: 527534398}
-  Collect_sfx: {fileID: 561819541}
-  Win_sfx: {fileID: 621860794}
-  Gameplay_ost: {fileID: 989295934}
-  button_pressed: {fileID: 910839210}
+  Collectable_Text: {fileID: 2106742965}
+  Timer_Text: {fileID: 611893231}
+  Final_Time_Text: {fileID: 481433357}
+  Best_time_Text: {fileID: 1041842141}
+  Best_time_end_Text: {fileID: 679544682}
   Door: {fileID: 2967408575307519631}
   best_time: 0
   Collectable_remaining: 2
@@ -10965,10 +10960,10 @@ MonoBehaviour:
   Dash_cool_bar: {fileID: 1850036075}
   Dash_cool_bar_fill: {fileID: 1017350756}
   Orientation: {fileID: 1514181544}
+  state: 0
   move_speed: 4
   air_speed: 0.4
   dash_speed: 15
-  state: 0
   jump_force: 6.25
   jump_cool: 0.25
   dash_force: 10
@@ -13501,7 +13496,7 @@ GameObject:
   - component: {fileID: 709872881}
   - component: {fileID: 709872880}
   m_Layer: 5
-  m_Name: Panel_End
+  m_Name: Panel_Win
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15620,16 +15615,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 527534395}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: To_Main_Menu
-        m_Mode: 1
+      - m_Target: {fileID: 1431135377}
+        m_TargetAssemblyTypeName: Change_Scene, Assembly-CSharp
+        m_MethodName: Scene_To_Load
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Main_Menu
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &877596861
@@ -21296,7 +21291,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1de5dff5fc0776458484ad422a7a64a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Change_Scene
-  button_pressed: {fileID: 0}
 --- !u!4 &1431135378
 Transform:
   m_ObjectHideFlags: 0
@@ -24023,7 +24017,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1714084046
 Transform:
   m_ObjectHideFlags: 0
