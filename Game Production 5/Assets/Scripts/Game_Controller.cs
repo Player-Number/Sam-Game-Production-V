@@ -9,9 +9,6 @@ public class Game_Controller : MonoBehaviour
     [SerializeField] Audio_Manager Audio_Manager;
     Change_Scene Change_Scene;
 
-    //[SerializeField] TMP_Text Sensitivity_num;
-    public Slider Sensitivity_Slider;
-    public Slider FOV_Slider;
     public GameObject Setting_Menu;
     public GameObject Close_button;
     public GameObject Resume_button;
@@ -19,7 +16,13 @@ public class Game_Controller : MonoBehaviour
     public TMP_Text Best_time_Text;
     public Canvas Main_Menu;
     public float Best_time = 0; // int.MaxValue
-    public bool disable_pause = true;
+
+    //public bool disable_pause = true;
+    //[SerializeField] TMP_Text Sensitivity_num;
+    //public Slider Sensitivity_Slider;
+    //public Slider FOV_Slider;
+    //public GameObject Setting_button;
+
 
     public static Game_Controller Instance { get; private set; }
 
@@ -39,12 +42,14 @@ public class Game_Controller : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P) && disable_pause == false) // pause 
+        if (Input.GetKeyDown(KeyCode.P)) // && disable_pause == false (pause
         {
             Setting_Menu.gameObject.SetActive(true);
+
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0;
+            Audio_Manager.SFX_Audio_Source.Pause();
         }
     }
 
@@ -55,6 +60,7 @@ public class Game_Controller : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         Audio_Manager.Play_SFX(Audio_Manager.Button_Pressed);
+        Audio_Manager.SFX_Audio_Source.Play();
     }
 
     public void To_Main_Menu()
@@ -70,6 +76,7 @@ public class Game_Controller : MonoBehaviour
     public void Close_Settings()
     {
         Setting_Menu.SetActive(false);
+        //Setting_button.SetActive(true);
         Audio_Manager.Play_SFX(Audio_Manager.Button_Pressed);
     }
 

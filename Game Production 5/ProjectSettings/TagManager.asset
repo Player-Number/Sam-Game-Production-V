@@ -8,6 +8,7 @@ TagManager:
   - New_Room
   - Death
   - Bounce_Pad
+  - Volume
   layers:
   - Default
   - TransparentFX

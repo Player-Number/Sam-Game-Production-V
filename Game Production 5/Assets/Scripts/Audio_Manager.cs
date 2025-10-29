@@ -3,7 +3,7 @@ using UnityEngine;
 public class Audio_Manager : MonoBehaviour
 {
     [SerializeField] AudioSource Music_Audio_Source;
-    [SerializeField] AudioSource SFX_Audio_Source;
+    public AudioSource SFX_Audio_Source;
 
     [Header("Muisc")]
     public AudioClip Main_Menu;
@@ -21,6 +21,11 @@ public class Audio_Manager : MonoBehaviour
     {
         Music_Audio_Source.clip = Main_Menu;
         Music_Audio_Source.Play();
+    }
+
+    private void Update()
+    {
+
     }
 
     public void Play_SFX(AudioClip SFX)
@@ -42,10 +47,4 @@ public class Audio_Manager : MonoBehaviour
     {
         Music_Audio_Source.Stop();
     }
-
-
-    //void Update()
-    //{
-
-    //}
 }

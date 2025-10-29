@@ -93,7 +93,7 @@ public class Change_Scene : MonoBehaviour
         Game_Controller.Close_button.SetActive(true);
         Game_Controller.Resume_button.SetActive(false);
         Game_Controller.To_Main_Menu_button.SetActive(false);
-        Game_Controller.disable_pause = true;
+        //Game_Controller.disable_pause = true;
     }
 
     void UI_In_Game()
@@ -101,6 +101,6 @@ public class Change_Scene : MonoBehaviour
         Game_Controller.Close_button.SetActive(false);
         Game_Controller.Resume_button.SetActive(true);
         Game_Controller.To_Main_Menu_button.SetActive(true);
-        Game_Controller.disable_pause = false;
+        //Game_Controller.disable_pause = false;
     }
 }

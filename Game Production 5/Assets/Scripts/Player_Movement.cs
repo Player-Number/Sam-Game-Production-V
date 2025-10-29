@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,7 @@ public class Player_Movement : MonoBehaviour
 
     Rigidbody rb;
     GameObject Game_Controller;
+    Settings Settings;
 
     public Transform Orientation;
 
@@ -63,7 +65,8 @@ public class Player_Movement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        Game_Controller = GameObject.Find("Game_Controller");
+        //Game_Controller = GameObject.Find("Game_Controller");
+        Settings = GameObject.Find("Game_Controller").GetComponent<Settings>();
         og_move_speed = move_speed;
         Dash_cool_bar.maxValue = dash_cool;
     }
@@ -80,8 +83,8 @@ public class Player_Movement : MonoBehaviour
         //if (Input.GetKeyDown(KeyCode.Mouse1))
         //    rb.AddForce(Cam.gameObject.transform.forward * dash_force, ForceMode.Impulse);
 
-        min_FOV = Game_Controller.GetComponent<Game_Controller>().FOV_Slider.value;
-        max_FOV = Game_Controller.GetComponent<Game_Controller>().FOV_Slider.value + 30;
+        min_FOV = Settings.FOV_Slider.value;
+        max_FOV = Settings.FOV_Slider.value + 30;
 
         if (is_grounded)
             rb.linearDamping = grounded_drag;

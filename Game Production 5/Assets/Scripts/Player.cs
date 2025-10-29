@@ -44,26 +44,26 @@ public class Player : MonoBehaviour
         Time.timeScale = 1;
         Game_Controller = GameObject.Find("Game_Controller").GetComponent<Game_Controller>();
         Audio_Manager = GameObject.Find("Audio_Manager").gameObject.GetComponent<Audio_Manager>();
-        //Game_Controller.Best_time = Game_Controller.GetComponent<Game_Controller>().Best_time;
         if (Game_Controller.Best_time != 0)
             Best_time_Text.text = "Best Time: " + Game_Controller.Best_time.ToString("F2");
         else
             Best_time_Text.text = "Best Time: N/A";
-        Game_Controller.disable_pause = false;
-        //move_input = input_actions.FindAction("Move");
+
+        //Game_Controller.disable_pause = false;
         //Cursor.visible = false;
         //Cursor.lockState = CursorLockMode.Locked;
+        //move_input = input_actions.FindAction("Move");
     }
 
     void Update()
     {
         Other_Actions();
 
-        //if (transform.position == new Vector3(0,1,0))
-        //    Timer = 0;
-
         Timer += Time.deltaTime;
         Timer_Text.text = Timer.ToString("F2");
+
+        //if (transform.position == new Vector3(0,1,0))
+        //    Timer = 0;
 
         // FOV based on speed
         //float current_speed = rb.linearVelocity.magnitude;
@@ -90,10 +90,11 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha0))
             transform.position = new_room_trigger_pos;
-        if (Input.GetKeyDown(KeyCode.Alpha9))
-            transform.position = new(0, 2, 210); // dev
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        else if (Input.GetKeyDown(KeyCode.Alpha9)) // win (dev
+            transform.position = new(0, 2, 210); 
+
+        else if(Input.GetKeyDown(KeyCode.Q))
             transform.position = (transform.position + Cam.gameObject.transform.forward * 10); // Dev        
 
         //if (Input.GetKeyDown(KeyCode.P) && disable_pause == false) // pause 
@@ -168,7 +169,7 @@ public class Player : MonoBehaviour
             End_Screen.SetActive(true);
             Final_Time_Text.text = "Final Time: " + Timer.ToString("F2");
             other.gameObject.SetActive(false);
-            Game_Controller.disable_pause = true;
+            //Game_Controller.disable_pause = true;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             //Audio_Manager.Play_SFX(Audio_Manager.Win);

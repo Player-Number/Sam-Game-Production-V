@@ -1,8 +1,10 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player_Cam : MonoBehaviour
 {
-    GameObject Game_Controller;
+    //GameObject Game_Controller;
+    Settings Settings;
     public float sens_X;
     public float sens_Y; // 200
     float rot_X;
@@ -12,13 +14,13 @@ public class Player_Cam : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        Game_Controller = GameObject.Find("Game_Controller");
+        Settings = GameObject.Find("Game_Controller").GetComponent<Settings>();
     }
 
     void Update()
     {
-        sens_X = Game_Controller.GetComponent<Game_Controller>().Sensitivity_Slider.value;
-        sens_Y = Game_Controller.GetComponent<Game_Controller>().Sensitivity_Slider.value;
+        sens_X = Settings.Sensitivity_Slider.value;
+        sens_Y = Settings.Sensitivity_Slider.value;
 
         float mouse_x = Input.GetAxis("Mouse X") * sens_X * Time.deltaTime;
         float mouse_y = Input.GetAxis("Mouse Y") * sens_Y * Time.deltaTime;
