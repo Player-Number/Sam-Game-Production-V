@@ -284,10 +284,10 @@ MonoBehaviour:
     The goal is to beat the whole game as fast as possible (your best time aka lowest
     time will be displayed).
 
-    
 
-    Press right click to dash; you will dash
-    in the direction that you are facing. Dashing has a cooldown of 2 sec.
+
+    Press right click to dash; you will dash in the
+    direction that you are facing. Dashing has a cooldown of 2 sec.
 
 '
   m_isRightToLeft: 0
@@ -556,7 +556,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
