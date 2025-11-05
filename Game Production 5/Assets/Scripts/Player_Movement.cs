@@ -8,6 +8,7 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] Camera Cam;
     [SerializeField] Slider Dash_cool_bar;
     [SerializeField] GameObject Dash_cool_bar_fill;
+    [SerializeField] ParticleSystem Speedlines;
 
     Rigidbody rb;
     GameObject Game_Controller;
@@ -103,6 +104,8 @@ public class Player_Movement : MonoBehaviour
         }
         else
             Dash_cool_bar_fill.SetActive(false);
+
+        Speedlines.emissionRate = rb.linearVelocity.magnitude * 7.5f;
     }
 
     private void FixedUpdate()
@@ -152,15 +155,6 @@ public class Player_Movement : MonoBehaviour
             rb.AddForce(10 * move_speed * move_dir.normalized, ForceMode.Force);
         else if (!is_grounded)
             rb.AddForce(10 * air_speed * move_speed * move_dir.normalized, ForceMode.Force);
-
-        //if (Input.GetKey(KeyCode.W))
-        //    rb.AddForce(rb.transform.forward * Time.deltaTime * rb_move_speed);
-        //if (Input.GetKey(KeyCode.A))
-        //    rb.AddForce(-rb.transform.right * Time.deltaTime * rb_move_speed);
-        //if (Input.GetKey(KeyCode.S))
-        //    rb.AddForce(-rb.transform.forward * Time.deltaTime * rb_move_speed);
-        //if (Input.GetKey(KeyCode.D))
-        //    rb.AddForce(rb.transform.right * Time.deltaTime * rb_move_speed);
     }
 
     void Jump()
@@ -195,6 +189,7 @@ public class Player_Movement : MonoBehaviour
         rb.linearVelocity = Vector3.zero;
         is_dashing = false;
         rb.useGravity = true;
+        //Speedlines.SetActive(false);
     }
     //private Vector3 delay_force_to_apply;
     //void Delay_Dash_Force()
@@ -238,17 +233,6 @@ public class Player_Movement : MonoBehaviour
 
         if (Max_Y_speed != 0 && rb.linearVelocity.y > Max_Y_speed)
             rb.linearVelocity = new(rb.linearVelocity.x, Max_Y_speed, rb.linearVelocity.z);
-        
-        //if (rb.linearVelocity.y >= vertical_move_cap) //rb.maxLinearVelocity
-        //    rb.linearVelocity = new(rb.linearVelocity.x, vertical_move_cap, rb.linearVelocity.z);
-        //if (rb.linearVelocity.x >= horizontal_move_cap)
-        //    rb.linearVelocity = new(horizontal_move_cap, rb.linearVelocity.y, rb.linearVelocity.z);
-        //if (rb.linearVelocity.x <= -horizontal_move_cap)
-        //    rb.linearVelocity = new(-horizontal_move_cap, rb.linearVelocity.y, rb.linearVelocity.z);
-        //if (rb.linearVelocity.z >= horizontal_move_cap)
-        //    rb.linearVelocity = new(rb.linearVelocity.x, rb.linearVelocity.y, horizontal_move_cap);
-        //if (rb.linearVelocity.z <= -horizontal_move_cap)
-        //    rb.linearVelocity = new(rb.linearVelocity.x, rb.linearVelocity.y, -horizontal_move_cap);
     }
 
     //private void OnCollisionEnter(Collision collision)

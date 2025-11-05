@@ -8,9 +8,9 @@ public class Player : MonoBehaviour
 {
     [SerializeField] Camera Cam;
     [SerializeField] GameObject Pause_Menu;
-    [SerializeField] GameObject Speedlines;
     [SerializeField] GameObject End_Screen;
     [SerializeField] Player_Movement Player_Movement;
+    //[SerializeField] GameObject Speedlines;
     //[SerializeField] InputActionAsset input_actions;
 
     [Header("Text")]
@@ -64,14 +64,6 @@ public class Player : MonoBehaviour
 
         //if (transform.position == new Vector3(0,1,0))
         //    Timer = 0;
-
-        // FOV based on speed
-        //float current_speed = rb.linearVelocity.magnitude;
-        //float speed_normalized = Mathf.Clamp01(current_speed / max_speed);
-        //float target_FOV = Mathf.Lerp(min_FOV, max_FOV, speed_normalized);
-
-        //Cam.fieldOfView = Mathf.SmoothDamp(Cam.fieldOfView, target_FOV, ref current_FOV_velocity, smooth_time);
-
     }
 
     //private void Move()
