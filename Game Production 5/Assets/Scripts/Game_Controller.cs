@@ -16,13 +16,12 @@ public class Game_Controller : MonoBehaviour
     public TMP_Text Best_time_Text;
     public Canvas Main_Menu;
     public float Best_time = 0; // int.MaxValue
+    //public Slider FOV_Slider;
 
     //public bool disable_pause = true;
     //[SerializeField] TMP_Text Sensitivity_num;
     //public Slider Sensitivity_Slider;
-    //public Slider FOV_Slider;
     //public GameObject Setting_button;
-
 
     public static Game_Controller Instance { get; private set; }
 

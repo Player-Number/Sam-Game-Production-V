@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class Player_Movement : MonoBehaviour
 {
-    [SerializeField] Camera Cam;
     [SerializeField] Slider Dash_cool_bar;
     [SerializeField] GameObject Dash_cool_bar_fill;
-    [SerializeField] ParticleSystem Speedlines;
+    public ParticleSystem Speedlines;
+    public Camera Cam;
 
     Rigidbody rb;
     GameObject Game_Controller;
@@ -84,8 +84,8 @@ public class Player_Movement : MonoBehaviour
         //if (Input.GetKeyDown(KeyCode.Mouse1))
         //    rb.AddForce(Cam.gameObject.transform.forward * dash_force, ForceMode.Impulse);
 
-        min_FOV = Settings.FOV_Slider.value;
-        max_FOV = Settings.FOV_Slider.value + 30;
+        //min_FOV = Settings.FOV_Slider.value;
+        //max_FOV = Settings.FOV_Slider.value + 30;
 
         if (is_grounded)
             rb.linearDamping = grounded_drag;
@@ -234,7 +234,6 @@ public class Player_Movement : MonoBehaviour
         if (Max_Y_speed != 0 && rb.linearVelocity.y > Max_Y_speed)
             rb.linearVelocity = new(rb.linearVelocity.x, Max_Y_speed, rb.linearVelocity.z);
     }
-
     //private void OnCollisionEnter(Collision collision)
     //{
     //    if (collision.gameObject.layer == 3)
