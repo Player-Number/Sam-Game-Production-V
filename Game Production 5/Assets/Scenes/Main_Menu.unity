@@ -790,6 +790,135 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 112829022}
   m_CullTransparentMesh: 1
+--- !u!1 &132672560
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 132672561}
+  - component: {fileID: 132672562}
+  m_Layer: 0
+  m_Name: SFX_Button_Pressed
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &132672561
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132672560}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1985562842}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &132672562
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132672560}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 4784279335387161441, guid: da03ef12699329b4298948b719a4b45d, type: 2}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 23aa88fe2b88d7b40a60ecabb526f53f, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &137789154
 GameObject:
   m_ObjectHideFlags: 0
@@ -1853,10 +1982,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 155244121}
+  - {fileID: 2078187955}
   - {fileID: 773631993}
   - {fileID: 149180866}
   - {fileID: 2026506482}
-  - {fileID: 2078187955}
   m_Father: {fileID: 535037249}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1918,10 +2047,10 @@ MonoBehaviour:
       - m_Target: {fileID: 595653867}
         m_TargetAssemblyTypeName: Update_Setting_Num, Assembly-CSharp
         m_MethodName: Update_Setting_Number
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 2078187956}
-          m_ObjectArgumentAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1992,7 +2121,7 @@ AudioSource:
   m_GameObject: {fileID: 603962862}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -1264505362329186776, guid: e88876d3e5ecf3942b8b77292f2e38f6, type: 2}
+  OutputAudioMixerGroup: {fileID: 1893444934504184102, guid: da03ef12699329b4298948b719a4b45d, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
@@ -3256,10 +3385,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7258716}
+  - {fileID: 1759512981}
   - {fileID: 60362281}
   - {fileID: 137789155}
   - {fileID: 591927328}
-  - {fileID: 1759512981}
   m_Father: {fileID: 535037249}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -3321,10 +3450,10 @@ MonoBehaviour:
       - m_Target: {fileID: 999583197}
         m_TargetAssemblyTypeName: Update_Setting_Num, Assembly-CSharp
         m_MethodName: Update_Setting_Number
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 1759512982}
-          m_ObjectArgumentAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3878,7 +4007,7 @@ GameObject:
   - component: {fileID: 1297583281}
   - component: {fileID: 1297583280}
   m_Layer: 5
-  m_Name: Text_Vol_Num
+  m_Name: Text_Slider_Val
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4014,7 +4143,7 @@ GameObject:
   - component: {fileID: 1308619184}
   - component: {fileID: 1308619183}
   m_Layer: 5
-  m_Name: Text_Num
+  m_Name: Text_Slider_Val
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4742,10 +4871,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 531409870}
+  - {fileID: 1297583279}
   - {fileID: 79096921}
   - {fileID: 1699996742}
   - {fileID: 16918170}
-  - {fileID: 1297583279}
   m_Father: {fileID: 535037249}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -4819,10 +4948,10 @@ MonoBehaviour:
       - m_Target: {fileID: 1705444787}
         m_TargetAssemblyTypeName: Update_Setting_Num, Assembly-CSharp
         m_MethodName: Update_Setting_Number
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 1297583280}
-          m_ObjectArgumentAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -4988,7 +5117,7 @@ GameObject:
   - component: {fileID: 1759512983}
   - component: {fileID: 1759512982}
   m_Layer: 5
-  m_Name: Text_Vol_Num
+  m_Name: Text_Slider_Val
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5686,10 +5815,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1314296921}
+  - {fileID: 1308619182}
   - {fileID: 1557920138}
   - {fileID: 617830046}
   - {fileID: 1375928361}
-  - {fileID: 1308619182}
   m_Father: {fileID: 535037249}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -5742,7 +5871,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 563507492}
   m_Direction: 0
   m_MinValue: 30
-  m_MaxValue: 120
+  m_MaxValue: 90
   m_WholeNumbers: 0
   m_Value: 60
   m_OnValueChanged:
@@ -5751,10 +5880,10 @@ MonoBehaviour:
       - m_Target: {fileID: 1880048820}
         m_TargetAssemblyTypeName: Update_Setting_Num, Assembly-CSharp
         m_MethodName: Update_Setting_Number
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 1308619183}
-          m_ObjectArgumentAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -5762,7 +5891,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 2070214124}
         m_TargetAssemblyTypeName: Settings, Assembly-CSharp
-        m_MethodName: Setting_FOV
+        m_MethodName: FOV_On_Val_Changed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6221,6 +6350,7 @@ Transform:
   m_Children:
   - {fileID: 603962863}
   - {fileID: 2135975081}
+  - {fileID: 132672561}
   m_Father: {fileID: 2070214123}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1985562843
@@ -6237,13 +6367,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Audio_Manager
   Music_Audio_Source: {fileID: 603962864}
   SFX_Audio_Source: {fileID: 2135975082}
+  SFX_Button_Pressed: {fileID: 132672562}
   Main_Menu: {fileID: 8300000, guid: 04b89334aa69fd348a1ff82721fa5003, type: 3}
   Gameplay: {fileID: 8300000, guid: 6ee7f792b27a4624083639b93ca737a5, type: 3}
   Other_Menu: {fileID: 8300000, guid: c58c2a1911198fe43a1bb1d557519455, type: 3}
   Win_OST: {fileID: 8300000, guid: 740b35eb0357c174988c7d0e7293826d, type: 3}
   Collecting: {fileID: 8300000, guid: 41ccbe71e4fa0c14f8bccd3ee42fd27d, type: 3}
   Door_Open: {fileID: 8300000, guid: f149772867d3f974f8f9a33138023c34, type: 3}
-  Button_Pressed: {fileID: 8300000, guid: 23aa88fe2b88d7b40a60ecabb526f53f, type: 3}
 --- !u!1 &2026506481
 GameObject:
   m_ObjectHideFlags: 0
@@ -6447,7 +6577,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b8f51ee23de3084cb83963ac5898fb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Settings
-  Audio_Mixer: {fileID: 24100000, guid: e88876d3e5ecf3942b8b77292f2e38f6, type: 2}
+  Audio_Mixer: {fileID: 24100000, guid: da03ef12699329b4298948b719a4b45d, type: 2}
   Music_Silder: {fileID: 999583196}
   SFX_Silder: {fileID: 1705444788}
   Sensitivity_Slider: {fileID: 595653866}
@@ -6597,7 +6727,7 @@ GameObject:
   - component: {fileID: 2078187957}
   - component: {fileID: 2078187956}
   m_Layer: 5
-  m_Name: Text_Num
+  m_Name: Text_Slider_Val
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6762,7 +6892,7 @@ AudioSource:
   m_GameObject: {fileID: 2135975080}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -6871985486882942667, guid: e88876d3e5ecf3942b8b77292f2e38f6, type: 2}
+  OutputAudioMixerGroup: {fileID: -5926036796230051149, guid: da03ef12699329b4298948b719a4b45d, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0

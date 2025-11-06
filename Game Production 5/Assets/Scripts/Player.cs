@@ -119,7 +119,7 @@ public class Player : MonoBehaviour
             Collectable_remaining -= 1;
             Collectable_Text.text = "Collectable Remaining: " + (Collectable_remaining);
             other.gameObject.SetActive(false);
-            Audio_Manager.Play_SFX(Audio_Manager.Collecting);
+            Audio_Manager.Play_SFX_One_Shot(Audio_Manager.Collecting);
             if (Collectable_remaining <= 0)
                 Door.GetComponent<Door>().enabled = true;
         }

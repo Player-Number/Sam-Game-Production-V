@@ -43,7 +43,7 @@ public class Game_Controller : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P)) // && disable_pause == false (pause
         {
             Setting_Menu.gameObject.SetActive(true);
-
+            Audio_Manager.Play_SFX_Button_Pressed();
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0;
@@ -57,13 +57,13 @@ public class Game_Controller : MonoBehaviour
         Setting_Menu.SetActive(false);
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        Audio_Manager.Play_SFX(Audio_Manager.Button_Pressed);
+        Audio_Manager.Play_SFX_Button_Pressed();
         Audio_Manager.Play_SFX();
     }
 
     public void To_Main_Menu()
     {
-        Audio_Manager.Play_SFX(Audio_Manager.Button_Pressed);
+        Audio_Manager.Play_SFX_Button_Pressed();
         Setting_Menu.SetActive(false);
         Change_Scene = FindAnyObjectByType<Change_Scene>();
         Change_Scene.Scene_To_Load("Main_Menu");
@@ -74,7 +74,7 @@ public class Game_Controller : MonoBehaviour
     public void Close_Settings()
     {
         Setting_Menu.SetActive(false);
-        Audio_Manager.Play_SFX(Audio_Manager.Button_Pressed);
+        Audio_Manager.Play_SFX_Button_Pressed();
         //Setting_button.SetActive(true);
     }
 

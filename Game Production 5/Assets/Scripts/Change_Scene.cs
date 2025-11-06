@@ -35,7 +35,7 @@ public class Change_Scene : MonoBehaviour
 
     public void Scene_To_Load(string name)
     {
-        Audio_Manager.Play_SFX(Audio_Manager.Button_Pressed);
+        Audio_Manager.Play_SFX_Button_Pressed();
         if (name == "How_Play" || name == "Controls")
         {
             Audio_Manager.Play_Music(Audio_Manager.Other_Menu);
@@ -78,14 +78,14 @@ public class Change_Scene : MonoBehaviour
 
     public void Quit()
     {
-        Audio_Manager.Play_SFX(Audio_Manager.Button_Pressed);
+        Audio_Manager.Play_SFX_Button_Pressed();
         Application.Quit();
     }
 
     public void Open_Settings()
     {
         Game_Controller.Setting_Menu.SetActive(true);
-        Audio_Manager.Play_SFX(Audio_Manager.Button_Pressed);
+        Audio_Manager.Play_SFX_Button_Pressed();
     }
 
     void UI_Not_In_Game()

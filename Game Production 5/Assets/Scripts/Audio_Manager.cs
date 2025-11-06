@@ -4,6 +4,7 @@ public class Audio_Manager : MonoBehaviour
 {
     [SerializeField] AudioSource Music_Audio_Source;
     [SerializeField] AudioSource SFX_Audio_Source;
+    [SerializeField] AudioSource SFX_Button_Pressed;
 
     [Header("Muisc")]
     public AudioClip Main_Menu;
@@ -14,7 +15,7 @@ public class Audio_Manager : MonoBehaviour
     [Header("SFX")]
     public AudioClip Collecting;
     public AudioClip Door_Open;
-    public AudioClip Button_Pressed;
+    //public AudioClip Button_Pressed;
     //public AudioClip Win;
 
     void Start()
@@ -28,7 +29,7 @@ public class Audio_Manager : MonoBehaviour
 
     //}
 
-    public void Play_SFX(AudioClip SFX)
+    public void Play_SFX_One_Shot(AudioClip SFX)
     {
         SFX_Audio_Source.PlayOneShot(SFX);
     }
@@ -58,4 +59,8 @@ public class Audio_Manager : MonoBehaviour
         SFX_Audio_Source.Play();
     }
 
+    public void Play_SFX_Button_Pressed()
+    {
+        SFX_Button_Pressed.Play();
+    }
 }

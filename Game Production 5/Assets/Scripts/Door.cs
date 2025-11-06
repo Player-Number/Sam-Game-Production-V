@@ -8,7 +8,7 @@ public class Door : MonoBehaviour
     void Start()
     {
         Audio_Manager = FindAnyObjectByType<Audio_Manager>();
-        Audio_Manager.Play_SFX(Audio_Manager.Door_Open);
+        Audio_Manager.Play_SFX_One_Shot(Audio_Manager.Door_Open);
     }
 
     void Update()

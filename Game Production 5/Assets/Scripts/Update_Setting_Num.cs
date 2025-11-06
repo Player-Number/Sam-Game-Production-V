@@ -4,21 +4,23 @@ using UnityEngine.UI;
 
 public class Update_Setting_Num : MonoBehaviour
 {
+    TMP_Text Value_Text;
     void Start()
     {
-        GetComponent<Slider>().value.ToString("F0");
+        Value_Text = GetComponentInChildren<TMP_Text>();
+        Update_Setting_Number();
     }
 
-    void Update()
-    {
+    //void Update()
+    //{
         
-    }
+    //}
 
-    public void Update_Setting_Number(TMP_Text Val_Text)
+    public void Update_Setting_Number()
     {
-        Val_Text.text = GetComponent<Slider>().value.ToString("F0");
-        if (gameObject.CompareTag("Volume")) 
-            Val_Text.text = (100 * GetComponent<Slider>().value).ToString("F0");
+        Value_Text.text = GetComponent<Slider>().value.ToString("F0");
+        if (gameObject.CompareTag("Volume"))
+            Value_Text.text = (100 * GetComponent<Slider>().value).ToString("F0");
     }
 
 }
