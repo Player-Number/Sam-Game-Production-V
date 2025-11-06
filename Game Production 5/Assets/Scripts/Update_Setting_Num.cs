@@ -19,10 +19,6 @@ public class Update_Setting_Num : MonoBehaviour
         Val_Text.text = GetComponent<Slider>().value.ToString("F0");
         if (gameObject.CompareTag("Volume")) 
             Val_Text.text = (100 * GetComponent<Slider>().value).ToString("F0");
-        //if (gameObject.name == "FOV_Slider")
-        //{
-        //    float def = GameObject.Find("Player").gameObject.GetComponent<Player_Movement>().min_FOV;
-        //}
     }
 
 }

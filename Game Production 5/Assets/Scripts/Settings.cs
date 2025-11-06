@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class Settings : MonoBehaviour
@@ -10,27 +11,29 @@ public class Settings : MonoBehaviour
     public Slider Sensitivity_Slider;
     public Slider FOV_Slider;
     Player_Movement Player_Movement;
+    Player_Cam Player_Cam;
 
-
-    //void Start()
-    //{
-    //    //if (PlayerPrefs.HasKey("Music_Vol"))
-    //    //{
-    //    //    Load_Music_Vol();
-    //    //}
-    //    //else
-    //    //{
-    //    //    Set_Music_Vol();
-    //    //}
-    //    //if (PlayerPrefs.HasKey("SFX_Vol"))
-    //    //{
-    //    //    Load_SFX_Vol();
-    //    //}
-    //    //else
-    //    //{
-    //    //    Set_SFX_Vol();
-    //    //}
-    //}
+    void Start()
+    {
+        Set_Music_Vol();
+        Set_SFX_Vol();
+        //if (PlayerPrefs.HasKey("Music_Vol"))
+        //{
+        //    Load_Music_Vol();
+        //}
+        //else
+        //{
+        //    Set_Music_Vol();
+        //}
+        //if (PlayerPrefs.HasKey("SFX_Vol"))
+        //{
+        //    Load_SFX_Vol();
+        //}
+        //else
+        //{
+        //    Set_SFX_Vol();
+        //}
+    }
 
     //void Update()
     //{
@@ -48,7 +51,7 @@ public class Settings : MonoBehaviour
         //PlayerPrefs.Save();
     }
 
-    public void Setting_FOV()
+    public void FOV_On_Val_Changed()
     {
         Player_Movement = FindAnyObjectByType<Player_Movement>();
         if (Player_Movement != null)
@@ -57,6 +60,16 @@ public class Settings : MonoBehaviour
             Player_Movement.max_FOV = FOV_Slider.value + 30;
             Player_Movement.Cam.fieldOfView = FOV_Slider.value;
             //Player_Movement.Speedlines.shape.radius = 1;
+        }
+    }
+
+    public void Sensitivity_On_Val_Changed()
+    {
+        Player_Cam = FindAnyObjectByType<Player_Cam>();
+        if (Player_Cam != null)
+        {
+            Player_Cam.sens_X = Sensitivity_Slider.value;
+            Player_Cam.sens_Y = Sensitivity_Slider.value;
         }
     }
 

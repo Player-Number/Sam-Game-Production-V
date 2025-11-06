@@ -11,8 +11,8 @@ public class Change_Scene : MonoBehaviour
 
     void Start()
     {
-        Game_Controller = GameObject.Find("Game_Controller").gameObject.GetComponent<Game_Controller>();
-        Audio_Manager = GameObject.Find("Audio_Manager").gameObject.GetComponent<Audio_Manager>();
+        Game_Controller = GameObject.Find("Game_Controller").GetComponent<Game_Controller>();
+        Audio_Manager = GameObject.Find("Audio_Manager").GetComponent<Audio_Manager>();
     }
 
     void Update()
@@ -35,7 +35,6 @@ public class Change_Scene : MonoBehaviour
 
     public void Scene_To_Load(string name)
     {
-        SceneManager.LoadScene(name);
         Audio_Manager.Play_SFX(Audio_Manager.Button_Pressed);
         if (name == "How_Play" || name == "Controls")
         {
@@ -56,6 +55,8 @@ public class Change_Scene : MonoBehaviour
             Game_Controller.Best_time_Text.gameObject.SetActive(false);
             UI_In_Game();
         }
+        SceneManager.LoadScene(name);
+
         //else if (name != "Main_Menu")
         //{
         //    Game_Controller.Best_time_Text.gameObject.SetActive(false);
@@ -79,7 +80,6 @@ public class Change_Scene : MonoBehaviour
     {
         Audio_Manager.Play_SFX(Audio_Manager.Button_Pressed);
         Application.Quit();
-        //button_pressed.Play();
     }
 
     public void Open_Settings()

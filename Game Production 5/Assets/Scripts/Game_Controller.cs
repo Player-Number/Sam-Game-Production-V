@@ -16,8 +16,8 @@ public class Game_Controller : MonoBehaviour
     public TMP_Text Best_time_Text;
     public Canvas Main_Menu;
     public float Best_time = 0; // int.MaxValue
-    //public Slider FOV_Slider;
 
+    //public Slider FOV_Slider;
     //public bool disable_pause = true;
     //[SerializeField] TMP_Text Sensitivity_num;
     //public Slider Sensitivity_Slider;
@@ -27,7 +27,6 @@ public class Game_Controller : MonoBehaviour
 
     void Start()
     {
-
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -48,7 +47,7 @@ public class Game_Controller : MonoBehaviour
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0;
-            Audio_Manager.SFX_Audio_Source.Pause();
+            Audio_Manager.Pause_SFX();
         }
     }
 
@@ -59,14 +58,14 @@ public class Game_Controller : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         Audio_Manager.Play_SFX(Audio_Manager.Button_Pressed);
-        Audio_Manager.SFX_Audio_Source.Play();
+        Audio_Manager.Play_SFX();
     }
 
     public void To_Main_Menu()
     {
         Audio_Manager.Play_SFX(Audio_Manager.Button_Pressed);
         Setting_Menu.SetActive(false);
-        Change_Scene = GameObject.Find("Change_Scene").GetComponent<Change_Scene>();
+        Change_Scene = FindAnyObjectByType<Change_Scene>();
         Change_Scene.Scene_To_Load("Main_Menu");
         //Game_Controller.GetComponent<Game_Controller>().Best_time_Text.gameObject.SetActive(true);
         //Game_Controller.GetComponent<Game_Controller>().Best_time_Text.text = "Best Time: " + best_time.ToString("F2");

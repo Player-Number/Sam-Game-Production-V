@@ -7,7 +7,7 @@ public class Door : MonoBehaviour
     Audio_Manager Audio_Manager;
     void Start()
     {
-        Audio_Manager = GameObject.Find("Audio_Manager").gameObject.GetComponent<Audio_Manager>();
+        Audio_Manager = FindAnyObjectByType<Audio_Manager>();
         Audio_Manager.Play_SFX(Audio_Manager.Door_Open);
     }
 

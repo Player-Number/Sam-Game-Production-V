@@ -66,11 +66,11 @@ public class Player_Movement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        //Game_Controller = GameObject.Find("Game_Controller");
-        Settings = GameObject.Find("Game_Controller").GetComponent<Settings>();
-        Settings.Setting_FOV();
+        Settings = FindAnyObjectByType<Settings>();
+        Settings.FOV_On_Val_Changed();
         og_move_speed = move_speed;
         Dash_cool_bar.maxValue = dash_cool;
+        //Game_Controller = GameObject.Find("Game_Controller");
     }
 
     void Update()
@@ -84,9 +84,6 @@ public class Player_Movement : MonoBehaviour
 
         //if (Input.GetKeyDown(KeyCode.Mouse1))
         //    rb.AddForce(Cam.gameObject.transform.forward * dash_force, ForceMode.Impulse);
-
-        //min_FOV = Settings.FOV_Slider.value;
-        //max_FOV = Settings.FOV_Slider.value + 30;
 
         if (is_grounded)
             rb.linearDamping = grounded_drag;
@@ -107,6 +104,7 @@ public class Player_Movement : MonoBehaviour
             Dash_cool_bar_fill.SetActive(false);
 
         Speedlines.emissionRate = rb.linearVelocity.magnitude * 7.5f;
+        //Speedlines.emission.rateOverTime = rb.linearVelocity.magnitude * 7.5f; // var
     }
 
     private void FixedUpdate()

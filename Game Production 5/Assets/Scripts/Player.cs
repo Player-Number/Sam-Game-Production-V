@@ -37,8 +37,8 @@ public class Player : MonoBehaviour
         new_room_trigger_pos = transform.position;
         Collectable_Text.text = "Collectable Remaining: " + (Collectable_remaining);
         Time.timeScale = 1;
-        Game_Controller = GameObject.Find("Game_Controller").GetComponent<Game_Controller>();
-        Audio_Manager = GameObject.Find("Audio_Manager").gameObject.GetComponent<Audio_Manager>();
+        Game_Controller = FindAnyObjectByType<Game_Controller>();
+        Audio_Manager = FindAnyObjectByType<Audio_Manager>();
         if (Game_Controller.Best_time != 0)
             Best_time_Text.text = "Best Time: " + Game_Controller.Best_time.ToString("F2");
         else
@@ -60,18 +60,6 @@ public class Player : MonoBehaviour
         //if (transform.position == new Vector3(0,1,0))
         //    Timer = 0;
     }
-
-    //private void Move()
-    //{
-    //    if (Input.GetKey(KeyCode.W))
-    //        rb.AddForce(rb.transform.forward * Time.deltaTime * rb_move_speed);
-    //    if (Input.GetKey(KeyCode.A))
-    //        rb.AddForce(-rb.transform.right * Time.deltaTime * rb_move_speed);
-    //    if (Input.GetKey(KeyCode.S))
-    //        rb.AddForce(-rb.transform.forward * Time.deltaTime * rb_move_speed);
-    //    if (Input.GetKey(KeyCode.D))
-    //        rb.AddForce(rb.transform.right * Time.deltaTime * rb_move_speed);
-    //}
 
     private void Other_Actions()
     {
@@ -156,10 +144,8 @@ public class Player : MonoBehaviour
             End_Screen.SetActive(true);
             Final_Time_Text.text = "Final Time: " + Timer.ToString("F2");
             other.gameObject.SetActive(false);
-            //Game_Controller.disable_pause = true;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
-            //Audio_Manager.Play_SFX(Audio_Manager.Win);
             Audio_Manager.Play_Music(Audio_Manager.Win_OST);
             Time.timeScale = 0;
             if (Timer < Game_Controller.Best_time || Game_Controller.Best_time == 0)
@@ -170,6 +156,8 @@ public class Player : MonoBehaviour
             }
             else
                 Best_time_end_Text.text = "Best Time: " + Game_Controller.Best_time.ToString("F2");
+            //Game_Controller.disable_pause = true;
+            //Audio_Manager.Play_SFX(Audio_Manager.Win);
         }
     }
 
