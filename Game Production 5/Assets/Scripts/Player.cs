@@ -1,8 +1,6 @@
 using TMPro;
 using UnityEngine;
 //using Unity.VisualScripting;
-//using UnityEngine.InputSystem;
-//using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -10,7 +8,6 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject Pause_Menu;
     [SerializeField] GameObject End_Screen;
     [SerializeField] Player_Movement Player_Movement;
-    //[SerializeField] GameObject Speedlines;
     //[SerializeField] InputActionAsset input_actions;
 
     [Header("Text")]
@@ -27,14 +24,12 @@ public class Player : MonoBehaviour
 
     Rigidbody rb;
 
-    //public float best_time = 0;
     public float Collectable_remaining = 2;
     float Timer = 0;
-    float Speedlines_timer = 0;
-
-    //bool disable_pause = false;
 
     Vector3 new_room_trigger_pos;
+    //public float best_time = 0;
+    //bool disable_pause = false;
 
     void Start()
     {
@@ -154,7 +149,7 @@ public class Player : MonoBehaviour
         }
         else if (other.gameObject.tag == "Bounce_Pad")
         {
-            rb.AddForce(Vector3.up * 200, ForceMode.Impulse);
+            rb.AddForce(Vector3.up * Player_Movement.jump_force * 2, ForceMode.Impulse);
         }
         else if (other.gameObject.name == "Win_Trigger")
         {

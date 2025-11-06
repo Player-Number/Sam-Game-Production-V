@@ -65,19 +65,19 @@ public class Game_Controller : MonoBehaviour
 
     public void To_Main_Menu()
     {
-        //Game_Controller.GetComponent<Game_Controller>().Best_time_Text.gameObject.SetActive(true);
-        //Game_Controller.GetComponent<Game_Controller>().Best_time_Text.text = "Best Time: " + best_time.ToString("F2");
         Audio_Manager.Play_SFX(Audio_Manager.Button_Pressed);
         Setting_Menu.SetActive(false);
         Change_Scene = GameObject.Find("Change_Scene").GetComponent<Change_Scene>();
         Change_Scene.Scene_To_Load("Main_Menu");
+        //Game_Controller.GetComponent<Game_Controller>().Best_time_Text.gameObject.SetActive(true);
+        //Game_Controller.GetComponent<Game_Controller>().Best_time_Text.text = "Best Time: " + best_time.ToString("F2");
     }
 
     public void Close_Settings()
     {
         Setting_Menu.SetActive(false);
-        //Setting_button.SetActive(true);
         Audio_Manager.Play_SFX(Audio_Manager.Button_Pressed);
+        //Setting_button.SetActive(true);
     }
 
     //public void On_Val_Changed(TMP_Text Val_Text, Slider Slider)
