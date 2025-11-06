@@ -68,6 +68,7 @@ public class Player_Movement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         //Game_Controller = GameObject.Find("Game_Controller");
         Settings = GameObject.Find("Game_Controller").GetComponent<Settings>();
+        Settings.Setting_FOV();
         og_move_speed = move_speed;
         Dash_cool_bar.maxValue = dash_cool;
     }

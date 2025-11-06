@@ -51,10 +51,13 @@ public class Settings : MonoBehaviour
     public void Setting_FOV()
     {
         Player_Movement = FindAnyObjectByType<Player_Movement>();
-        Player_Movement.min_FOV = FOV_Slider.value;
-        Player_Movement.max_FOV = FOV_Slider.value + 30;
-        Player_Movement.Cam.fieldOfView = FOV_Slider.value;
-        //Player_Movement.Speedlines.shape.radius = 1;
+        if (Player_Movement != null)
+        {
+            Player_Movement.min_FOV = FOV_Slider.value;
+            Player_Movement.max_FOV = FOV_Slider.value + 30;
+            Player_Movement.Cam.fieldOfView = FOV_Slider.value;
+            //Player_Movement.Speedlines.shape.radius = 1;
+        }
     }
 
     //void Load_Music_Vol()
