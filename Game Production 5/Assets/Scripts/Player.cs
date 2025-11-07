@@ -135,10 +135,10 @@ public class Player : MonoBehaviour
             transform.position = new_room_trigger_pos;
             rb.linearVelocity = Vector3.zero;
         }
-        else if (other.gameObject.tag == "Bounce_Pad")
-        {
-            rb.AddForce(Vector3.up * Player_Movement.jump_force * 2, ForceMode.Impulse);
-        }
+        //else if (other.gameObject.tag == "Bounce_Pad")
+        //{
+        //    rb.AddForce(Vector3.up * Player_Movement.jump_force * 2, ForceMode.Impulse);
+        //}
         else if (other.gameObject.name == "Win_Trigger")
         {
             End_Screen.SetActive(true);
