@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject Pause_Menu;
     [SerializeField] GameObject End_Screen;
     [SerializeField] Player_Movement Player_Movement;
+    [SerializeField] ParticleSystem Collected_Particle;
+    [SerializeField] ParticleSystem To_Power_Door;
     //[SerializeField] InputActionAsset input_actions;
 
     [Header("Text")]
@@ -118,10 +120,17 @@ public class Player : MonoBehaviour
         {
             Collectable_remaining -= 1;
             Collectable_Text.text = "Collectable Remaining: " + (Collectable_remaining);
+            //if (Collectable_remaining <= 0)
+            //    Door.GetComponent<Door>().enabled = true;
             other.gameObject.SetActive(false);
             Audio_Manager.Play_SFX_One_Shot(Audio_Manager.Collecting);
-            if (Collectable_remaining <= 0)
-                Door.GetComponent<Door>().enabled = true;
+            ParticleSystem Collected_Particle_inst = Instantiate(Collected_Particle, other.transform.position, Quaternion.identity);
+            if (!Collected_Particle_inst.isEmitting)
+            {
+                Destroy(Collected_Particle_inst);
+            }
+            ParticleSystem To_Power_Door_inst = Instantiate(To_Power_Door, other.transform.position, Quaternion.identity);
+            To_Power_Door_inst.gameObject.GetComponent<To_Power_Door>().Door = Door;
         }
         else if (other.gameObject.tag == "New_Room")
         {

@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3b0b57b869e47454e826997716c3c631, type: 2}
+  - {fileID: 2100000, guid: 5591eb08192d3814590cd15076438fe6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -155,7 +155,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3b0b57b869e47454e826997716c3c631, type: 2}
+  - {fileID: 2100000, guid: 5591eb08192d3814590cd15076438fe6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -337,8 +337,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9a7f22d3bd4bcc4195e01ea3b93086a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Door
-  Door_opening_sfx: {fileID: -6193350012472837792}
   open_speed: 2
+  Glow:
+  - {fileID: 87490862935446248}
+  - {fileID: 5751328566942446719}
 --- !u!82 &-6193350012472837792
 AudioSource:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ public class Player_Movement : MonoBehaviour
 {
     [SerializeField] Slider Dash_cool_bar;
     [SerializeField] GameObject Dash_cool_bar_fill;
+    [SerializeField] float Speedlines_emission_rate;
     public ParticleSystem Speedlines;
     public Camera Cam;
 
@@ -103,7 +104,7 @@ public class Player_Movement : MonoBehaviour
         else
             Dash_cool_bar_fill.SetActive(false);
 
-        Speedlines.emissionRate = rb.linearVelocity.magnitude * 7.5f;
+        Speedlines.emissionRate = rb.linearVelocity.magnitude * Speedlines_emission_rate;
         //Speedlines.emission.rateOverTime = rb.linearVelocity.magnitude * 7.5f; // var
     }
 
