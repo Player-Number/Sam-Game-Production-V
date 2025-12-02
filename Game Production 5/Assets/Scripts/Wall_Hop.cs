@@ -15,6 +15,9 @@ public class Wall_Hop : MonoBehaviour
     void Update()
     {
         transform.position = player_move.transform.position;
+        //Debug.Log("touching_wall " + touching_wall);
+        //Debug.Log("player_move.is_grounded " + player_move.is_grounded);
+        //Debug.Log("can_wall_hop " + can_wall_hop);
         if (touching_wall && !player_move.is_grounded && can_wall_hop && Input.GetKeyDown(KeyCode.Space))
         {
             player_move.Jump(wall_hop_jump_force); // , player_move.GetComponent<Rigidbody>()

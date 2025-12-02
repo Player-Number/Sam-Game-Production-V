@@ -47,12 +47,14 @@ public class Change_Scene : MonoBehaviour
             Audio_Manager.Stop_Music();
             Audio_Manager.Play_Music(Audio_Manager.Main_Menu);
             Game_Controller.Best_time_Text.gameObject.SetActive(true);
+            Time.timeScale = 1;
             UI_Not_In_Game();
         }
         else if (name == "Game_Scene")
         {
             Audio_Manager.Play_Music(Audio_Manager.Gameplay);
             Game_Controller.Best_time_Text.gameObject.SetActive(false);
+            Game_Controller.lock_mouse = true;
             UI_In_Game();
         }
         SceneManager.LoadScene(name);

@@ -16,6 +16,9 @@ public class Game_Controller : MonoBehaviour
     public TMP_Text Best_time_Text;
     public Canvas Main_Menu;
     public float Best_time = 0; // int.MaxValue
+    public bool lock_mouse = false;
+    public bool can_open_setting = true;
+    bool is_setting_active = false;
 
     //public Slider FOV_Slider;
     //public bool disable_pause = true;
@@ -25,7 +28,7 @@ public class Game_Controller : MonoBehaviour
 
     public static Game_Controller Instance { get; private set; }
 
-    void Start()
+    void Awake()
     {
         if (Instance != null && Instance != this)
         {
@@ -38,16 +41,36 @@ public class Game_Controller : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        if (PlayerPrefs.HasKey("Best_Time"))
+        {
+            Best_time = PlayerPrefs.GetFloat("Best_Time");
+            if (Best_time != 0)
+            {
+                Best_time_Text.text = "Best Time: " + Best_time.ToString("F2");
+            }
+        }
+    }
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P)) // && disable_pause == false (pause
+        if (Input.GetKeyDown(KeyCode.P) && can_open_setting) // && disable_pause == false (pause
         {
-            Setting_Menu.gameObject.SetActive(true);
-            Audio_Manager.Play_SFX_Button_Pressed();
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-            Time.timeScale = 0;
-            Audio_Manager.Pause_SFX();
+            if (!is_setting_active)
+            {
+                Setting_Menu.gameObject.SetActive(true);
+                Audio_Manager.Play_SFX_Button_Pressed();
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+                Time.timeScale = 0;
+                Audio_Manager.Pause_SFX();
+                is_setting_active = true;
+            }
+            else
+            {
+                Close_Settings();
+            }
         }
     }
 
@@ -55,10 +78,13 @@ public class Game_Controller : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         Setting_Menu.SetActive(false);
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
         Audio_Manager.Play_SFX_Button_Pressed();
-        Audio_Manager.Play_SFX();
+        Audio_Manager.Play_SFX(); // for gameplay audio
+        if (lock_mouse)
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
     }
 
     public void To_Main_Menu()
@@ -75,6 +101,7 @@ public class Game_Controller : MonoBehaviour
     {
         Setting_Menu.SetActive(false);
         Audio_Manager.Play_SFX_Button_Pressed();
+        is_setting_active = false;
         //Setting_button.SetActive(true);
     }
 

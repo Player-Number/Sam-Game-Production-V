@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
         if (Game_Controller.Best_time != 0)
             Best_time_Text.text = "Best Time: " + Game_Controller.Best_time.ToString("F2");
         else
-            Best_time_Text.text = "Best Time: N/A";
+            Best_time_Text.text = "Best Time: None";
 
         //Game_Controller.disable_pause = false;
         //Cursor.visible = false;
@@ -157,11 +157,13 @@ public class Player : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Audio_Manager.Play_Music(Audio_Manager.Win_OST);
             Time.timeScale = 0;
+            Game_Controller.lock_mouse = false;
             if (Timer < Game_Controller.Best_time || Game_Controller.Best_time == 0)
             {
                 Game_Controller.Best_time = Timer;
                 Best_time_end_Text.text = "Best Time: " + Game_Controller.Best_time.ToString("F2");
                 Game_Controller.Best_time_Text.text = "Best Time: " + Game_Controller.Best_time.ToString("F2");
+                PlayerPrefs.SetFloat("Best_Time", Game_Controller.Best_time);
             }
             else
                 Best_time_end_Text.text = "Best Time: " + Game_Controller.Best_time.ToString("F2");
