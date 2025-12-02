@@ -27,7 +27,6 @@ public class Player_Movement : MonoBehaviour
     public float move_speed;
     float og_move_speed;
     public float air_speed;
-    public float dash_speed;
 
     [Header("Jumping")]
     public float jump_force;
@@ -36,18 +35,19 @@ public class Player_Movement : MonoBehaviour
 
     [Header("Dashing")]
     public float dash_force;
-    public float dash_force_up;
+    public float dash_speed;
     public float dash_cool;
     float dash_cool_timer = 2;
     bool is_dashing = false;
     public float dash_duration = 0.2f;
     public float Max_Y_speed;
+    public float dash_force_up;
 
     [Header("Ground Check")]
     public float player_height;
     public float grounded_drag;
     public LayerMask ground_layer;
-    bool is_grounded;
+    public bool is_grounded;
 
     [Header("FOV Settings")]
     public float max_speed_FOV = 10f;
@@ -141,9 +141,10 @@ public class Player_Movement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space) && is_grounded && ready_to_jump)
         {
-            Jump();
+            Jump(jump_force);
             ready_to_jump = false;
-            Invoke(nameof(Reset_Jump), jump_cool);
+
+            //Invoke(nameof(Reset_Jump), jump_cool);
         }
     }
 
@@ -157,11 +158,12 @@ public class Player_Movement : MonoBehaviour
             rb.AddForce(10 * air_speed * move_speed * move_dir.normalized, ForceMode.Force);
     }
 
-    void Jump()
+    public void Jump(float jump_force)
     {
         rb.linearVelocity = new(rb.linearVelocity.x, 0, rb.linearVelocity.z);
         rb.AddForce(Vector3.up * jump_force, ForceMode.Impulse);
         ready_to_jump = false;
+        Invoke(nameof(Reset_Jump), jump_cool);
     }
 
     void Reset_Jump()

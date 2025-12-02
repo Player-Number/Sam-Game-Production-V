@@ -68,11 +68,11 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha0))
             transform.position = new_room_trigger_pos;
 
-        else if (Input.GetKeyDown(KeyCode.Alpha9)) // win (dev
+        else if (Input.GetKeyDown(KeyCode.Alpha9)) // win (dev <----------------------------------------------------
             transform.position = new(0, 2, 210); 
 
         else if(Input.GetKeyDown(KeyCode.Q))
-            transform.position = (transform.position + Cam.gameObject.transform.forward * 10); // Dev        
+            transform.position = (transform.position + Cam.gameObject.transform.forward * 10); // Dev <------------------------------------------------------
 
         //if (Input.GetKeyDown(KeyCode.P) && disable_pause == false) // pause 
         //{

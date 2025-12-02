@@ -9,6 +9,8 @@ TagManager:
   - Death
   - Bounce_Pad
   - Volume
+  - FxTemporaire
+  - Wall
   layers:
   - Default
   - TransparentFX
