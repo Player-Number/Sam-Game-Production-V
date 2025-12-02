@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Change_Scene : MonoBehaviour
 {
+    
     Game_Controller Game_Controller;
     Audio_Manager Audio_Manager;
     //string scene_name;
@@ -48,6 +50,7 @@ public class Change_Scene : MonoBehaviour
             Audio_Manager.Play_Music(Audio_Manager.Main_Menu);
             Game_Controller.Best_time_Text.gameObject.SetActive(true);
             Time.timeScale = 1;
+            //GameObject.Find("Panel_BG").GetComponent<Image>().material = null;
             UI_Not_In_Game();
         }
         else if (name == "Game_Scene")
@@ -55,6 +58,7 @@ public class Change_Scene : MonoBehaviour
             Audio_Manager.Play_Music(Audio_Manager.Gameplay);
             Game_Controller.Best_time_Text.gameObject.SetActive(false);
             Game_Controller.lock_mouse = true;
+            //GameObject.Find("Panel_BG").GetComponent<Image>().material = Game_Controller.Setting_BG_visible;
             UI_In_Game();
         }
         SceneManager.LoadScene(name);

@@ -7,7 +7,7 @@ public class Delete_Best_Time : MonoBehaviour
     [SerializeField] GameObject del_box;
     Game_Controller controller;
     Audio_Manager Audio_Manager;
-    float timer = 3;
+    //float timer = 3;
     bool is_box_active = false;
     void Start()
     {
@@ -17,6 +17,21 @@ public class Delete_Best_Time : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Delete) && controller.Best_time != 0)
+        {
+            //Audio_Manager.Play_SFX_Button_Pressed();
+            if (!is_box_active)
+            {
+                del_box.SetActive(true);
+                controller.can_open_setting = false;
+                is_box_active = true;
+            }
+            else
+            {
+                No();
+            }
+        }
+
         //if (Input.GetKey(KeyCode.Delete) && controller.Best_time != 0)
         //{
         //    timer -= Time.deltaTime;
@@ -35,22 +50,6 @@ public class Delete_Best_Time : MonoBehaviour
         //    timer = 3;
         //    timer_text.gameObject.SetActive(false);
         //}
-
-        if (Input.GetKeyDown(KeyCode.Delete) && controller.Best_time != 0)
-        {
-            //Audio_Manager.Play_SFX_Button_Pressed();
-            if (!is_box_active)
-            {
-                del_box.SetActive(true);
-                controller.can_open_setting = false;
-                is_box_active = true;
-            }
-            else
-            {
-                No();
-            }
-        }
-
     }
 
     public void Yes()
