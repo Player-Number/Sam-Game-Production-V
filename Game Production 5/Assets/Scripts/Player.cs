@@ -4,21 +4,16 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] Camera Cam;
+    [SerializeField] Camera Gameplay_Cam;
+    [SerializeField] Camera Win_Cam;
     [SerializeField] GameObject Pause_Menu;
     [SerializeField] GameObject End_Screen;
+    [SerializeField] GameObject Gameplay_UI;
     [SerializeField] Player_Movement Player_Movement;
     [SerializeField] ParticleSystem Collected_Particle;
     [SerializeField] ParticleSystem To_Power_Door;
     //[SerializeField] InputActionAsset input_actions;
 
-    [Header("Text")]
-    [SerializeField] TMP_Text Collectable_Text;
-    [SerializeField] TMP_Text Timer_Text;
-    [SerializeField] TMP_Text Final_Time_Text;
-    [SerializeField] TMP_Text Best_time_Text;
-    [SerializeField] TMP_Text Best_time_end_Text;
-    
     public GameObject Door;
 
     Game_Controller Game_Controller;
@@ -30,6 +25,12 @@ public class Player : MonoBehaviour
     float Timer = 0;
 
     Vector3 new_room_trigger_pos;
+    [Header("Text")]
+    [SerializeField] TMP_Text Collectable_Text;
+    [SerializeField] TMP_Text Timer_Text;
+    [SerializeField] TMP_Text Final_Time_Text;
+    [SerializeField] TMP_Text Best_time_Text;
+    [SerializeField] TMP_Text Best_time_end_Text;
     //public float best_time = 0;
     //bool disable_pause = false;
 
@@ -72,7 +73,7 @@ public class Player : MonoBehaviour
             transform.position = new(0, 2, 210); 
 
         else if(Input.GetKeyDown(KeyCode.Q))
-            transform.position = (transform.position + Cam.gameObject.transform.forward * 10); // Dev <------------------------------------------------------
+            transform.position = (transform.position + Gameplay_Cam.gameObject.transform.forward * 10); // Dev <------------------------------------------------------
 
         //if (Input.GetKeyDown(KeyCode.P) && disable_pause == false) // pause 
         //{
@@ -144,19 +145,18 @@ public class Player : MonoBehaviour
             transform.position = new_room_trigger_pos;
             rb.linearVelocity = Vector3.zero;
         }
-        //else if (other.gameObject.tag == "Bounce_Pad")
-        //{
-        //    rb.AddForce(Vector3.up * Player_Movement.jump_force * 2, ForceMode.Impulse);
-        //}
         else if (other.gameObject.name == "Win_Trigger")
         {
             End_Screen.SetActive(true);
+            Gameplay_UI.SetActive(false);
+            Gameplay_Cam.gameObject.SetActive(false);
+            Win_Cam.gameObject.SetActive(true);
+            //other.gameObject.SetActive(false);
             Final_Time_Text.text = "Final Time: " + Timer.ToString("F2");
-            other.gameObject.SetActive(false);
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             Audio_Manager.Play_Music(Audio_Manager.Win_OST);
-            Time.timeScale = 0;
+            //Time.timeScale = 0;
             Game_Controller.lock_mouse = false;
             if (Timer < Game_Controller.Best_time || Game_Controller.Best_time == 0)
             {
@@ -170,6 +170,10 @@ public class Player : MonoBehaviour
             //Game_Controller.disable_pause = true;
             //Audio_Manager.Play_SFX(Audio_Manager.Win);
         }
+        //else if (other.gameObject.tag == "Bounce_Pad")
+        //{
+        //    rb.AddForce(Vector3.up * Player_Movement.jump_force * 2, ForceMode.Impulse);
+        //}
     }
 
     //private void Unused()
