@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Player_Look : MonoBehaviour
+public class old_Player_Look : MonoBehaviour
 {
     [SerializeField] Transform player_body;
     float min_view_dis = 85f;

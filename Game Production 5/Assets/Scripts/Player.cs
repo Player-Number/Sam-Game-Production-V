@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField] Player_Movement Player_Movement;
     [SerializeField] ParticleSystem Collected_Particle;
     [SerializeField] ParticleSystem To_Power_Door;
+    [SerializeField] ParticleSystem Player_Death;
     //[SerializeField] InputActionAsset input_actions;
 
     public GameObject Door;
@@ -117,7 +118,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Collectable")
+        if (other.CompareTag("Collectable"))
         {
             Collectable_remaining -= 1;
             Collectable_Text.text = "Collectable Remaining: " + (Collectable_remaining);
@@ -133,15 +134,17 @@ public class Player : MonoBehaviour
             ParticleSystem To_Power_Door_inst = Instantiate(To_Power_Door, other.transform.position, Quaternion.identity);
             To_Power_Door_inst.gameObject.GetComponent<To_Power_Door>().Door = Door;
         }
-        else if (other.gameObject.tag == "New_Room")
+        else if (other.CompareTag("New_Room"))
         {
             new_room_trigger_pos = other.transform.position;
             Collectable_Text.text = "Collectable Remaining: " + (Collectable_remaining);
             //other.gameObject.SetActive(false);
             //move_door = false;
         }
-        else if (other.gameObject.tag == "Death")
+        else if (other.CompareTag("Death"))
         {
+            Player_Death.transform.position = transform.position;
+            Player_Death.Play();
             transform.position = new_room_trigger_pos;
             rb.linearVelocity = Vector3.zero;
         }

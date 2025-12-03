@@ -42,7 +42,7 @@ public class Change_Scene : MonoBehaviour
         {
             Audio_Manager.Play_Music(Audio_Manager.Other_Menu);
             Game_Controller.Best_time_Text.gameObject.SetActive(false);
-            UI_Not_In_Game();
+            Setting_Buttons_Not_In_Game();
         }
         else if (name == "Main_Menu")
         {
@@ -50,8 +50,10 @@ public class Change_Scene : MonoBehaviour
             Audio_Manager.Play_Music(Audio_Manager.Main_Menu);
             Game_Controller.Best_time_Text.gameObject.SetActive(true);
             Time.timeScale = 1;
+            Game_Controller.lock_mouse = false;
+
             //GameObject.Find("Panel_BG").GetComponent<Image>().material = null;
-            UI_Not_In_Game();
+            Setting_Buttons_Not_In_Game();
         }
         else if (name == "Game_Scene")
         {
@@ -59,7 +61,7 @@ public class Change_Scene : MonoBehaviour
             Game_Controller.Best_time_Text.gameObject.SetActive(false);
             Game_Controller.lock_mouse = true;
             //GameObject.Find("Panel_BG").GetComponent<Image>().material = Game_Controller.Setting_BG_visible;
-            UI_In_Game();
+            Setting_Buttons_In_Game();
         }
         SceneManager.LoadScene(name);
 
@@ -94,7 +96,7 @@ public class Change_Scene : MonoBehaviour
         Audio_Manager.Play_SFX_Button_Pressed();
     }
 
-    void UI_Not_In_Game()
+    void Setting_Buttons_Not_In_Game()
     {
         Game_Controller.Close_button.SetActive(true);
         Game_Controller.Resume_button.SetActive(false);
@@ -102,7 +104,7 @@ public class Change_Scene : MonoBehaviour
         //Game_Controller.disable_pause = true;
     }
 
-    void UI_In_Game()
+    void Setting_Buttons_In_Game()
     {
         Game_Controller.Close_button.SetActive(false);
         Game_Controller.Resume_button.SetActive(true);
