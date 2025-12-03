@@ -285,9 +285,13 @@ MonoBehaviour:
     time will be displayed).
 
 
-
     Press right click to dash; you will dash in the
     direction that you are facing. Dashing has a cooldown of 2 sec.
+
+
+    Pressing
+    jump while airbone and near a wall will make you do a wall hop, which gives you
+    upward force (you will only get to do 1, resets upon being grounded)
 
 '
   m_isRightToLeft: 0
@@ -316,8 +320,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

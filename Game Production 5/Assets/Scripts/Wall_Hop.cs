@@ -3,6 +3,7 @@ using UnityEngine;
 public class Wall_Hop : MonoBehaviour
 {
     [SerializeField] float wall_hop_jump_force;
+    [SerializeField] ParticleSystem wall_hop_vfx;
     Player_Movement player_move;
 
     bool touching_wall = false;
@@ -19,6 +20,8 @@ public class Wall_Hop : MonoBehaviour
         {
             player_move.Jump(wall_hop_jump_force); // , player_move.GetComponent<Rigidbody>()
             can_wall_hop = false;
+            wall_hop_vfx.transform.position = new(transform.position.x, transform.position.y - 1, transform.position.z);
+            wall_hop_vfx.Play();
             Debug.Log("Wall_Hop");
         }
         else if (!can_wall_hop && player_move.is_grounded)
