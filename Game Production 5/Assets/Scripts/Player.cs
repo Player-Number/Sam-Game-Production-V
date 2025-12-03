@@ -137,7 +137,7 @@ public class Player : MonoBehaviour
         {
             new_room_trigger_pos = other.transform.position;
             Collectable_Text.text = "Collectable Remaining: " + (Collectable_remaining);
-            other.gameObject.SetActive(false);
+            //other.gameObject.SetActive(false);
             //move_door = false;
         }
         else if (other.gameObject.tag == "Death")

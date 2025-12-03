@@ -6,15 +6,15 @@ public class Entered_New_Room : MonoBehaviour
     [SerializeField] GameObject Door;
     [SerializeField] GameObject Collectables;
 
-    void Start()
-    {
+    //void Start()
+    //{
         
-    }
+    //}
 
-    void Update()
-    {
+    //void Update()
+    //{
         
-    }
+    //}
 
     private void OnTriggerEnter(Collider other)
     {
@@ -25,6 +25,7 @@ public class Entered_New_Room : MonoBehaviour
             for (int i = 0; i < Collectables.transform.childCount; i++)
             {
                 Collectables.transform.GetChild(i).gameObject.GetComponent<Outline>().enabled = true;
+                //Collectables.transform.GetChild(i).gameObject.SetActive(true);
             }
 
             gameObject.SetActive(false);

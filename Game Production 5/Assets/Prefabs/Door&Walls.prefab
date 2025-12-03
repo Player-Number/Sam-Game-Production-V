@@ -97,7 +97,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 563892031674619048}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 3e1e3154fd1f0314d9846fb729198866, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -208,7 +208,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6524009711862144204}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 3e1e3154fd1f0314d9846fb729198866, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -319,7 +319,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6586743290464784034}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 3e1e3154fd1f0314d9846fb729198866, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -430,7 +430,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7592597795864131738}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 3e1e3154fd1f0314d9846fb729198866, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -542,6 +542,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6064078613207658415, guid: 951337cc29202b8448eb12899e8189c7, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 3e1e3154fd1f0314d9846fb729198866, type: 2}
     - target: {fileID: 8011282279422438111, guid: 951337cc29202b8448eb12899e8189c7, type: 3}
       propertyPath: m_Name
       value: glow
@@ -612,6 +616,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3500691053170487841, guid: 104ab45c97b6aea41b6daf14dfd5f201, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 3e1e3154fd1f0314d9846fb729198866, type: 2}
     - target: {fileID: 9032879130484459908, guid: 104ab45c97b6aea41b6daf14dfd5f201, type: 3}
       propertyPath: m_Name
       value: Door
@@ -686,6 +694,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6064078613207658415, guid: 00bd73c688754cf4484e9d27530231ae, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 3e1e3154fd1f0314d9846fb729198866, type: 2}
     - target: {fileID: 8011282279422438111, guid: 00bd73c688754cf4484e9d27530231ae, type: 3}
       propertyPath: m_Name
       value: Glow
