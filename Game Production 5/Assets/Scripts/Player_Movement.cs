@@ -13,16 +13,17 @@ public class Player_Movement : MonoBehaviour
     public Camera Cam;
 
     Rigidbody rb;
-    GameObject Game_Controller;
     Settings Settings;
+    //GameObject Game_Controller;
 
     public Transform Orientation;
-
     public Movement_State state;
 
     Vector3 move_dir;
     float horizontal_input;
     float vertical_input;
+
+    bool no_cool = false;
 
     [Header("Speed")]
     public float move_speed;
@@ -84,9 +85,6 @@ public class Player_Movement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse1))
             Dash();
 
-        //if (Input.GetKeyDown(KeyCode.Mouse1))
-        //    rb.AddForce(Cam.gameObject.transform.forward * dash_force, ForceMode.Impulse);
-
         if (is_grounded)
             rb.linearDamping = grounded_drag;
         else
@@ -105,8 +103,24 @@ public class Player_Movement : MonoBehaviour
         else
             Dash_cool_bar_fill.SetActive(false);
 
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            if (no_cool)
+            {
+                no_cool = false;
+            }
+            else
+            {
+                no_cool = true;
+            }
+        }
+
+        if (no_cool)
+        {
+            dash_cool_timer = 0;    
+        }
+
         Speedlines.emissionRate = rb.linearVelocity.magnitude * Speedlines_emission_rate;
-        //Speedlines.emission.rateOverTime = rb.linearVelocity.magnitude * 7.5f; // var
     }
 
     private void FixedUpdate()

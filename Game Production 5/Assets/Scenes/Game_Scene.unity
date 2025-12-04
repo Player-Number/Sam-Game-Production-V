@@ -2586,7 +2586,7 @@ GameObject:
   - component: {fileID: 203505494}
   - component: {fileID: 203505493}
   - component: {fileID: 203505492}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2602,7 +2602,7 @@ Transform:
   m_GameObject: {fileID: 203505490}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.22, y: -21.5, z: 15.26}
+  m_LocalPosition: {x: 0, y: -20, z: 15.26}
   m_LocalScale: {x: 20, y: 3, z: 30}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6569,7 +6569,6 @@ MonoBehaviour:
   Jump_VFX: {fileID: 198555892}
   Speedlines: {fileID: 1912576288}
   Cam: {fileID: 330585545}
-  Jump_VFX_Pos: {x: 0, y: 0, z: 0}
   Orientation: {fileID: 1514181544}
   state: 0
   move_speed: 4
@@ -13748,7 +13747,7 @@ GameObject:
   - component: {fileID: 1016301856}
   - component: {fileID: 1016301855}
   - component: {fileID: 1016301854}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15085,7 +15084,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7112393746496346291, guid: eef8dbcfc45ef0648985ec40dec69da9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -19
+      value: -17.53
       objectReference: {fileID: 0}
     - target: {fileID: 7112393746496346291, guid: eef8dbcfc45ef0648985ec40dec69da9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -20978,15 +20977,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8490402518400201257, guid: 70a41f141b7f6c747a0fbaa8a38cebb8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.18
+      value: -8.27
       objectReference: {fileID: 0}
     - target: {fileID: 8490402518400201257, guid: 70a41f141b7f6c747a0fbaa8a38cebb8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -18
+      value: -17.72
       objectReference: {fileID: 0}
     - target: {fileID: 8490402518400201257, guid: 70a41f141b7f6c747a0fbaa8a38cebb8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 15.429993
+      value: 15.79
       objectReference: {fileID: 0}
     - target: {fileID: 8490402518400201257, guid: 70a41f141b7f6c747a0fbaa8a38cebb8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -22256,6 +22255,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1654755225}
     m_Modifications:
+    - target: {fileID: 3555613755200354897, guid: 9a8af91f500d2c84d9c5a21a75117c2e, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4551583933823149311, guid: 9a8af91f500d2c84d9c5a21a75117c2e, type: 3}
       propertyPath: m_LocalScale.x
       value: 20

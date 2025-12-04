@@ -22,6 +22,7 @@ public class Entered_New_Room : MonoBehaviour
         {
             other.GetComponent<Player>().Door = Door;
             other.GetComponent<Player>().Collectable_remaining = Collectables.transform.childCount;
+            other.GetComponent<Player>().door_power = Collectables.transform.childCount;
             for (int i = 0; i < Collectables.transform.childCount; i++)
             {
                 Collectables.transform.GetChild(i).gameObject.GetComponent<Outline>().enabled = true;

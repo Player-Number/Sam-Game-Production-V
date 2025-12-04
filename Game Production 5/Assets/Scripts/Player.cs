@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-//using Unity.VisualScripting;
 
 public class Player : MonoBehaviour
 {
@@ -23,6 +22,7 @@ public class Player : MonoBehaviour
     Rigidbody rb;
 
     public float Collectable_remaining = 2;
+    public float door_power = 2;
     float Timer = 0;
 
     Vector3 new_room_trigger_pos;
@@ -32,8 +32,6 @@ public class Player : MonoBehaviour
     [SerializeField] TMP_Text Final_Time_Text;
     [SerializeField] TMP_Text Best_time_Text;
     [SerializeField] TMP_Text Best_time_end_Text;
-    //public float best_time = 0;
-    //bool disable_pause = false;
 
     void Start()
     {
@@ -48,9 +46,6 @@ public class Player : MonoBehaviour
         else
             Best_time_Text.text = "Best Time: None";
 
-        //Game_Controller.disable_pause = false;
-        //Cursor.visible = false;
-        //Cursor.lockState = CursorLockMode.Locked;
         //move_input = input_actions.FindAction("Move");
     }
 
@@ -59,71 +54,26 @@ public class Player : MonoBehaviour
         Other_Actions();
 
         Timer += Time.deltaTime;
-        Timer_Text.text = Timer.ToString("F2");
-
-        //if (transform.position == new Vector3(0,1,0))
-        //    Timer = 0;
+        Timer_Text.text = Timer.ToString("F2");    
     }
 
     private void Other_Actions()
     {
         if (Input.GetKeyDown(KeyCode.Alpha0))
-            transform.position = new_room_trigger_pos;
+            transform.position = new(new_room_trigger_pos.x, new_room_trigger_pos.y + 1, new_room_trigger_pos.z);
 
-        else if (Input.GetKeyDown(KeyCode.Alpha9)) // win (dev <----------------------------------------------------
-            transform.position = new(0, 2, 210); 
+        else if (Input.GetKeyDown(KeyCode.Alpha9)) // win
+            transform.position = new(0, 2, 210);
 
-        else if(Input.GetKeyDown(KeyCode.Q))
-            transform.position = (transform.position + Gameplay_Cam.gameObject.transform.forward * 10); // Dev <------------------------------------------------------
-
-        //if (Input.GetKeyDown(KeyCode.P) && disable_pause == false) // pause 
-        //{
-        //    Pause_Menu.gameObject.SetActive(true);
-        //    Cursor.visible = true;
-        //    Cursor.lockState = CursorLockMode.None;
-        //    Time.timeScale = 0;
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.Mouse1) && dash_cool <= 0)
-        //{
-        //    rb.AddForce(Cam.gameObject.transform.forward * dash_force, ForceMode.Impulse); // dash
-        //    dash_cool = 3;
-        //    Speedlines.SetActive(true);
-        //    Speedlines_timer = 0.5f;
-        //}
-        //else if (dash_cool > 0)
-        //{
-        //    dash_cool -= Time.deltaTime;
-        //    Speedlines_timer -= Time.deltaTime;
-        //    Dash_cool_Text.text = "Dash Cooldown: " + dash_cool.ToString("F0"); // F3
-        //    if (Speedlines_timer <= 0)
-        //        Speedlines.SetActive(false);
-        //}
-        //else if (dash_cool < 0)
-        //    dash_cool = 0;
-
-
-        //if (Input.GetKey(KeyCode.Space) && is_grounded == true) // jump
-        //{
-        //    rb.AddForce(Vector3.up * jump_force);
-        //    //is_grounded = false;
-        //}
-        //if (rb.linearVelocity.y == 0)
-        //    is_grounded = true;
-        //else
-        //    is_grounded = false;
-
-        //is_grounded = Physics.Raycast(transform.position, Vector3.down, 1 * 0.5f + 0.2f);
+        else if (Input.GetKeyDown(KeyCode.R))
+            Door.GetComponent<Door>().enabled = true;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Collectable"))
         {
-            Collectable_remaining -= 1;
-            Collectable_Text.text = "Collectable Remaining: " + (Collectable_remaining);
-            //if (Collectable_remaining <= 0)
-            //    Door.GetComponent<Door>().enabled = true;
+            Collect();
             other.gameObject.SetActive(false);
             Audio_Manager.Play_SFX_One_Shot(Audio_Manager.Collecting);
             ParticleSystem Collected_Particle_inst = Instantiate(Collected_Particle, other.transform.position, Quaternion.identity);
@@ -138,8 +88,6 @@ public class Player : MonoBehaviour
         {
             new_room_trigger_pos = other.transform.position;
             Collectable_Text.text = "Collectable Remaining: " + (Collectable_remaining);
-            //other.gameObject.SetActive(false);
-            //move_door = false;
         }
         else if (other.CompareTag("Death"))
         {
@@ -154,12 +102,10 @@ public class Player : MonoBehaviour
             Gameplay_UI.SetActive(false);
             Gameplay_Cam.gameObject.SetActive(false);
             Win_Cam.gameObject.SetActive(true);
-            //other.gameObject.SetActive(false);
             Final_Time_Text.text = "Final Time: " + Timer.ToString("F2");
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             Audio_Manager.Play_Music(Audio_Manager.Win_OST);
-            //Time.timeScale = 0;
             Game_Controller.lock_mouse = false;
             if (Timer < Game_Controller.Best_time || Game_Controller.Best_time == 0)
             {
@@ -170,80 +116,12 @@ public class Player : MonoBehaviour
             }
             else
                 Best_time_end_Text.text = "Best Time: " + Game_Controller.Best_time.ToString("F2");
-            //Game_Controller.disable_pause = true;
-            //Audio_Manager.Play_SFX(Audio_Manager.Win);
         }
-        //else if (other.gameObject.tag == "Bounce_Pad")
-        //{
-        //    rb.AddForce(Vector3.up * Player_Movement.jump_force * 2, ForceMode.Impulse);
-        //}
     }
 
-    //private void Unused()
-    //{
-    //    //if (Input.GetKey(KeyCode.W))
-    //    //{
-    //    //    transform.position = (rb.transform.forward * Time.deltaTime);
-    //    //    transform.position = Vector3.up * Time.deltaTime;
-    //    //}
-
-    //    //if (mud_timer > 0)
-    //    //{
-    //    //    mud_timer -= Time.deltaTime;
-    //    //    is_grounded = false;
-    //    //    //if (mud_timer <= 0)
-    //    //    //{
-    //    //    //    mud_timer = 1;
-    //    //    //    can_jump = true;
-    //    //    //} 
-    //    //}
-
-    //    // Normalize speed to a 0-1 ratio
-    //    //float speed_ratio = Mathf.InverseLerp(min_speed, max_speed, current_speed);
-
-    //    //// Calculate the target FOV based on the speed ratio
-    //    //float target_FOV = Mathf.Lerp(min_FOV, max_FOV, speed_ratio);
-
-    //    //Cam.fieldOfView = Mathf.Lerp(Cam.fieldOfView, target_FOV, Time.deltaTime * FOV_change_speed);
-
-    //    //if (move_door)
-    //    //{
-    //    //    Door.GetComponent<Door>().enabled = true;
-    //    //    //Door.transform.position += Vector3.up * Time.deltaTime * 2;
-    //    //    //Door_opening_sfx.Play();
-    //    //    //if (Door.transform.position.y >= 6.5f)
-    //    //    //{
-    //    //    //    move_door = false;
-    //    //    //}
-    //    //}
-    //}
-
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    //if (other.gameObject.name == "Speed_Area")
-    //    //{
-    //    //    rb_move_speed /= 2;
-    //    //}
-    //    //if (other.gameObject.name == "Mud")
-    //    //{
-    //    //    move_speed *= 6;
-    //    //}
-    //}
-
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (collision.gameObject.name == "Floor")
-    //    {
-    //        is_grounded = true;
-    //    }
-    //}
-
-    //private void New_Input_Move()
-    //{
-    //    Debug.Log(move_input.ReadValue<Vector2>() + "move_input.ReadValue<Vector2>()");
-    //    dir = move_input.ReadValue<Vector2>();
-    //    Vector2 move_amount = dir * move_speed * Time.deltaTime;
-    //    transform.position = new Vector3(transform.position.x + move_amount.x, transform.position.y, transform.position.z + move_amount.y);
-
-    //}
+    public void Collect()
+    {
+        Collectable_remaining--;
+        Collectable_Text.text = "Collectable Remaining: " + (Collectable_remaining);
+    }
 }

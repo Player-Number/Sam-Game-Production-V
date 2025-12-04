@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    //[SerializeField] AudioSource Door_opening_sfx;
     [SerializeField] float open_speed = 2;
     [SerializeField] List<MeshRenderer> Glow;
-    //public Material glow;
     Audio_Manager Audio_Manager;
     void Start()
     {
         Audio_Manager = FindAnyObjectByType<Audio_Manager>();
         Audio_Manager.Play_SFX_One_Shot(Audio_Manager.Door_Open);
-        //glow.EnableKeyword("_EMISSION");
     }
 
     void Update()

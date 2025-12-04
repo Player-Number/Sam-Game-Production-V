@@ -8,27 +8,33 @@ public class To_Power_Door : MonoBehaviour
     [SerializeField] float speed;
     public GameObject Door;
     Player player;
-    float speedx2;
+    float speed_fast;
+    bool count_door_power = false;
     void Start()
     {
         player = FindAnyObjectByType<Player>();
-        speedx2 = speed * 2;
+        speed_fast = speed * 3;
     }
 
-    void Update()
-    {
+    //void Update()
+    //{
 
-    }
+    //}
 
     private void FixedUpdate()
     {
-        if (player.Collectable_remaining == 0) 
-            speed = speedx2;
+        if (player.door_power == 1) 
+            speed = speed_fast;
         transform.position = Vector3.MoveTowards(transform.position, Door.transform.position, Time.fixedDeltaTime * speed);
         if (transform.position == Door.transform.position)
         {
+            if (!count_door_power)
+            {
+                player.door_power--;
+                count_door_power = true;
+            }
             Power_Door.gameObject.SetActive(true);
-            if (player.Collectable_remaining <= 0)
+            if (player.door_power <= 0)
             {
                 Door.GetComponent<Door>().enabled = true;
                 Door.GetComponent<Door>().Change_Glow(Door_Open_Glow);
