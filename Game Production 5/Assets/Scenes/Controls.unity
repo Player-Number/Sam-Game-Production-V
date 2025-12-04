@@ -214,8 +214,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1230907260}
-  - {fileID: 1610276876}
   - {fileID: 274698994}
+  - {fileID: 1610276876}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -282,14 +282,14 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'WASD - Move
 
-    Space - Jump
+    Space - Jump/Wall Hop
 
     Right Click - Dash
 
-    P - Pause/Open
-    Settings
+    P
+    - Pause/Open Settings
 
-    0 - Respawn'
+    0 (Zero) - Respawn'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
