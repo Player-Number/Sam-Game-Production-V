@@ -44,14 +44,7 @@ public class Game_Controller : MonoBehaviour
 
     private void Start()
     {
-        if (PlayerPrefs.HasKey("Best_Time"))
-        {
-            Best_time = PlayerPrefs.GetFloat("Best_Time");
-            if (Best_time != 0)
-            {
-                Best_time_Text.text = "Best Time: " + Best_time.ToString("F2");
-            }
-        }
+        Load_Best_Time();
     }
 
     void Update()
@@ -101,6 +94,18 @@ public class Game_Controller : MonoBehaviour
         Resume();
         //Game_Controller.GetComponent<Game_Controller>().Best_time_Text.gameObject.SetActive(true);
         //Game_Controller.GetComponent<Game_Controller>().Best_time_Text.text = "Best Time: " + best_time.ToString("F2");
+    }
+
+    public void Load_Best_Time()
+    {
+        if (PlayerPrefs.HasKey("Best_Time"))
+        {
+            Best_time = PlayerPrefs.GetFloat("Best_Time");
+            if (Best_time != 0)
+            {
+                Best_time_Text.text = "Best Time: " + Best_time.ToString("F2");
+            }
+        }
     }
 
     //public void Close_Settings()

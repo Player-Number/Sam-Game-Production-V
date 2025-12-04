@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class Change_Scene : MonoBehaviour
 {
-    
     Game_Controller Game_Controller;
     Audio_Manager Audio_Manager;
     //string scene_name;
@@ -51,9 +50,8 @@ public class Change_Scene : MonoBehaviour
             Game_Controller.Best_time_Text.gameObject.SetActive(true);
             Time.timeScale = 1;
             Game_Controller.lock_mouse = false;
-
-            //GameObject.Find("Panel_BG").GetComponent<Image>().material = null;
             Setting_Buttons_Not_In_Game();
+            //GameObject.Find("Panel_BG").GetComponent<Image>().material = null;
         }
         else if (name == "Game_Scene")
         {

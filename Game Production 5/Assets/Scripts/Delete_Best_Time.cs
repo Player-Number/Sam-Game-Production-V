@@ -3,16 +3,15 @@ using UnityEngine;
 
 public class Delete_Best_Time : MonoBehaviour
 {
-    [SerializeField] TMP_Text timer_text;
     [SerializeField] GameObject del_box;
     Game_Controller controller;
     Audio_Manager Audio_Manager;
-    //float timer = 3;
     bool is_box_active = false;
     void Start()
     {
         controller = FindAnyObjectByType<Game_Controller>();
         Audio_Manager = FindAnyObjectByType<Audio_Manager>();
+        controller.Load_Best_Time();
     }
 
     void Update()
@@ -31,7 +30,6 @@ public class Delete_Best_Time : MonoBehaviour
                 No();
             }
         }
-
         //if (Input.GetKey(KeyCode.Delete) && controller.Best_time != 0)
         //{
         //    timer -= Time.deltaTime;
